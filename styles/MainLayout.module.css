@@ -1,0 +1,9 @@
+.wrapper {
+    max-width: 2560px;
+    margin: auto;
+    min-height: 100vh;
+}
+.header {
+    padding: 0 50px;
+    background-color: azure;
+}
