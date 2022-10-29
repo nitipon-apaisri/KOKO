@@ -1,12 +1,16 @@
-import { Typography } from "antd";
+import { Typography, Input } from "antd";
 import MetaHead from "../../components/MetaHead";
+import styles from "../../styles/Home.module.css";
 const { Title } = Typography;
-
+const { Search } = Input;
 const Home = () => {
     return (
         <>
             <MetaHead />
-            <Title>Hello World</Title>
+            <div className={styles.container}>
+                <Title>Hello World</Title>
+                <Search enterButton />
+            </div>
         </>
     );
 };

@@ -5,7 +5,7 @@ import styles from "../styles/MainLayout.module.css";
 const MainLayout = ({ children }: { children: any }) => {
     return (
         <>
-            <Layout>
+            <Layout className={styles.layout}>
                 <Header className={styles.header}>Header</Header>
                 <Content className={styles.wrapper}>{children}</Content>
                 <Footer>Footer</Footer>
