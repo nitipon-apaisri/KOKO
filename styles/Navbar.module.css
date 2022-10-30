@@ -4,8 +4,9 @@
 .menu_list {
     display: flex;
     list-style: none;
-    justify-content: end;
+    justify-content: flex-end;
     margin-bottom: 0;
+    font-weight: bolder;
 }
 .menu_item {
     margin-right: 16px;
