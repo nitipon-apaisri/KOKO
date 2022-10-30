@@ -1,0 +1,12 @@
+.menu {
+    max-height: 80px;
+}
+.menu_list {
+    display: flex;
+    list-style: none;
+    justify-content: end;
+    margin-bottom: 0;
+}
+.menu_item {
+    margin-right: 16px;
+}
