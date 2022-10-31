@@ -1,7 +1,5 @@
-export interface InitialCollections {}
-
-export type CollectionContextType = {
-    collecitons:[]
-    getCollections: (collection: InitialCollections) => void
+export type ContextProps = {
+    collections:[]
+    getCollection?: (collectionId: string) => void
 }
     

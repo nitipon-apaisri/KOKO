@@ -6,16 +6,16 @@ import { CollecitonContext } from "../../contexts/CollectionContext";
 const { Title } = Typography;
 const { Search } = Input;
 const Home = () => {
-    const collection = React.useContext(CollecitonContext);
-    React.useEffect(() => {
-        console.log(collection.str);
-    });
+    const { getCollection } = React.useContext(CollecitonContext);
+    const fetchCollection = (value: string) => {
+        if (getCollection) getCollection(value);
+    };
     return (
         <>
             <MetaHead />
             <div className={styles.container}>
                 <Title>Lookup A Collection</Title>
-                <Search enterButton placeholder="E.g. 'what-the-by-kamwoonear'" />
+                <Search enterButton placeholder="E.g. 'what-the-by-kamwoonear'" onSearch={(value: string) => fetchCollection(value)} />
             </div>
         </>
     );
