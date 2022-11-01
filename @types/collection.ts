@@ -1,5 +1,5 @@
 export type ContextProps = {
-    collections:[]
+    collection:[]
     getCollection?: (collectionId: string) => void
 }
     

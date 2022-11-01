@@ -3,12 +3,15 @@ import { Typography, Input } from "antd";
 import MetaHead from "../../components/MetaHead";
 import styles from "../../styles/Home.module.css";
 import { CollecitonContext } from "../../contexts/CollectionContext";
+
 const { Title } = Typography;
 const { Search } = Input;
 const Home = () => {
     const { getCollection } = React.useContext(CollecitonContext);
     const fetchCollection = (value: string) => {
-        if (getCollection) getCollection(value);
+        if (getCollection) {
+            getCollection(value);
+        }
     };
     return (
         <>
