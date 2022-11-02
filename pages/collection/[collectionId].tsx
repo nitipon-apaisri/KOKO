@@ -4,16 +4,28 @@ import { CollecitonContext } from "../../contexts/CollectionContext";
 
 const Collection = () => {
     const router = useRouter();
-    const { collection } = React.useContext(CollecitonContext);
+    const { collection, notFound, loading, getCollection } = React.useContext(CollecitonContext);
     const { collectionId } = router.query;
-    const [notFound, setNotFound] = React.useState<Boolean>(false);
+    const collection_id: string = collectionId as string;
+
     React.useEffect(() => {
-        if (collection?.length === 0) setNotFound(true);
-        //TODO: Redirect to Home if collection id dosen't match to searched collection
-    }, [collection]);
+        if (collection?.length === 0 && collection_id !== undefined) {
+            if (getCollection) getCollection(collection_id);
+        }
+    }, [collection, getCollection, collection_id, notFound]);
+
     return (
         <>
-            <p>{collectionId}</p>
+            {(() => {
+                if (loading === true) {
+                    return <span>Loading</span>;
+                }
+                if (notFound === true) {
+                    return <span>404</span>;
+                } else {
+                    return <p>{collectionId}</p>;
+                }
+            })()}
         </>
     );
 };
