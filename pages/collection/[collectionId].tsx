@@ -16,6 +16,7 @@ const Collection = () => {
 
     return (
         <>
+            {/* TODO: Add meta head and interface for respone object */}
             {(() => {
                 if (loading === true) {
                     return <span>Loading</span>;
