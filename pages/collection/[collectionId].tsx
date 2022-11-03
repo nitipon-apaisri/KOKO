@@ -9,13 +9,14 @@ const Collection = () => {
     const collection_id: string = collectionId as string;
 
     React.useEffect(() => {
-        if (collection?.length === 0 && collection_id !== undefined) {
+        if (!collection && collection_id !== undefined) {
             if (getCollection) getCollection(collection_id);
         }
     }, [collection, getCollection, collection_id, notFound]);
 
     return (
         <>
+            {collection ? console.log(collection._id) : console.log("null")}
             {/* TODO: Add meta head and interface for respone object */}
             {(() => {
                 if (loading === true) {
