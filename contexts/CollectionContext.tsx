@@ -13,7 +13,7 @@ const CollecitonProvider = ({ children }: any) => {
             .get(`collections?collection_id=${collectionId}`)
             .then((res) => {
                 if (res.data.data.results.length !== 0) {
-                    setCollection({ ...res.data.data.results[0] });
+                    setCollection(res.data.data.results[0]);
                     setTimeout(() => {
                         setLoading(false);
                     }, 50);

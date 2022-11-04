@@ -4,6 +4,7 @@ export type ContextProps = {
         collection: string;
         creator_id: string;
         description: string;
+        cover:string
         is_creator: boolean;
         media: string;
         socialMedia: {};
@@ -24,6 +25,7 @@ export interface collectionObject {
     collection: string;
     creator_id: string;
     description: string;
+    cover:string
     is_creator: boolean;
     media: string;
     socialMedia: {};

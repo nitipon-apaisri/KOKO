@@ -22,6 +22,13 @@ a {
 * {
     box-sizing: border-box;
 }
-.ant-layout-content {
-    flex: none;
+.container {
+    width: 1440px;
+    margin: 80px 0;
+}
+.cover {
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
