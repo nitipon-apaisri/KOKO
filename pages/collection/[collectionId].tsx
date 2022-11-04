@@ -1,6 +1,9 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import { CollecitonContext } from "../../contexts/CollectionContext";
+import MetaHead from "../../components/MetaHead";
+import { CollectionInfo } from "../../components/Collection";
+import { collectionObject } from "../../@types/collection";
 
 const Collection = () => {
     const router = useRouter();
@@ -16,8 +19,8 @@ const Collection = () => {
 
     return (
         <>
-            {collection ? console.log(collection._id) : console.log("null")}
             {/* TODO: Add meta head and interface for respone object */}
+            <MetaHead title={collection ? `Lookup | ${collection?.collection}` : "Collection not found"} description={collection ? collection?.description : "Collection not found"} />
             {(() => {
                 if (loading === true) {
                     return <span>Loading</span>;
@@ -25,7 +28,7 @@ const Collection = () => {
                 if (notFound === true) {
                     return <span>404</span>;
                 } else {
-                    return <p>{collectionId}</p>;
+                    return <CollectionInfo collection={collection as collectionObject} />;
                 }
             })()}
         </>

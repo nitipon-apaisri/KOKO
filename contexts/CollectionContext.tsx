@@ -16,12 +16,12 @@ const CollecitonProvider = ({ children }: any) => {
                     setCollection({ ...res.data.data.results[0] });
                     setTimeout(() => {
                         setLoading(false);
-                    }, 150);
+                    }, 50);
                 } else {
                     setNotFound(true);
                     setTimeout(() => {
                         setLoading(false);
-                    }, 150);
+                    }, 50);
                 }
             })
             .catch((err) => console.error(err));
