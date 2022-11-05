@@ -1,8 +1,8 @@
 import * as React from "react";
-import { collectionObject, ContextProps } from "../@types/collection";
+import { collectionObject, collectionContextPartialProps } from "../@types/collection";
 import { parasApi } from "../api";
 
-const CollecitonContext = React.createContext<Partial<ContextProps>>({});
+const CollecitonContext = React.createContext<Partial<collectionContextPartialProps>>({});
 const CollecitonProvider = ({ children }: any) => {
     const [collection, setCollection] = React.useState<collectionObject>();
     const [notFound, setNotFound] = React.useState<boolean>(false);
