@@ -2,8 +2,10 @@
     min-height: 100vh;
 }
 .wrapper {
-    max-width: 2560px;
+    max-width: 1440px;
+    height: 100%;
     margin: auto;
+    background: #ffffff;
 }
 .header {
     padding: 0 50px;

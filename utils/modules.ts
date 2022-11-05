@@ -1,3 +1,4 @@
+import { collectionObject } from "../@types/collection";
 import { parasCDN } from "../constants/baseUrls";
 
 export const replaceIPFSToParasCDN = (url:string) => {
@@ -18,3 +19,17 @@ export const concatMediaWithParasCDN = (url: string) => {
         return
     }
 }
+
+export const genetateProfileMedias = ({cover, media}:{cover:string, media:string}) => {
+    const profileMedias = {
+        bgImg: {
+            backgroundColor: cover ? "transparent" : "#e3e3e3",
+            backgroundImage: cover ? `url(${concatMediaWithParasCDN(cover)})` : "",
+        },
+        pfp: {
+            backgroundColor: media ? "transparent" : "#e3e3e3",
+            backgroundImage: media ? `url(${concatMediaWithParasCDN(media)})` : "",
+        },
+    };
+    return profileMedias
+} 

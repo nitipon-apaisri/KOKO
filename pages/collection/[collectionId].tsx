@@ -2,7 +2,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { CollecitonContext } from "../../contexts/CollectionContext";
 import MetaHead from "../../components/MetaHead";
-import { CollectionInfo } from "../../components/Collection";
+import { MainProfileLayout } from "../../components/MainProfile";
 import { collectionObject } from "../../@types/collection";
 
 const Collection = () => {
@@ -28,7 +28,7 @@ const Collection = () => {
                 if (notFound === true) {
                     return <span>404</span>;
                 } else {
-                    return <CollectionInfo collection={collection as collectionObject} />;
+                    return <MainProfileLayout data={collection as collectionObject} />;
                 }
             })()}
         </>
