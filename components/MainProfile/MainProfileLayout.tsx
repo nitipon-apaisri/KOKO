@@ -18,7 +18,7 @@ const MainProfileLayout = ({ collectionData, collectionId, holdersData, getHolde
         }
     }, []);
     React.useEffect(() => {
-        if (holdersData.length === collectionData?.owner_ids.length) setLoading(false);
+        if (holdersData.length >= collectionData?.owner_ids.length) setLoading(false);
     }, [holdersData, collectionData?.owner_ids.length]);
     const columns = [
         {
