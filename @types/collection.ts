@@ -2,7 +2,10 @@ export type collectionContextPartialProps = {
     collection: any;
     notFound: boolean;
     loading: boolean;
+    collections: []
+    collectionsSearch: []
     getCollection?: (collectionId: string) => void;
+    onSearchACollection?: (input: string) => void
 }
 export interface collectionObject {
     _id: string;
@@ -21,3 +24,5 @@ export interface collectionObject {
     total_owners: number;
     volume: string;
 }
+
+export type search = (input:string) => void

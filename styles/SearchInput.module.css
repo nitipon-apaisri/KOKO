@@ -1,0 +1,16 @@
+.search_wrapper {
+    width: 640px;
+    border: 0.5px solid #dfdfdf;
+    text-align: left;
+    padding: 4px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+.searchIcon {
+    color: #c5c5c5;
+}
+.searchInput {
+    width: 100%;
+}

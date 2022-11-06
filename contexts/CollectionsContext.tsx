@@ -2,9 +2,11 @@ import * as React from "react";
 import { collectionObject, collectionContextPartialProps } from "../@types/collection";
 import { parasApi } from "../api";
 
-const CollecitonContext = React.createContext<Partial<collectionContextPartialProps>>({});
+const CollecitonsContext = React.createContext<collectionContextPartialProps | null>(null);
 const CollecitonProvider = ({ children }: any) => {
     const [collection, setCollection] = React.useState<collectionObject>();
+    const [collections, setCollections] = React.useState<[]>([]);
+    const [collectionsSearch, setCollectionSearch] = React.useState<[]>([]);
     const [notFound, setNotFound] = React.useState<boolean>(false);
     const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -26,6 +28,9 @@ const CollecitonProvider = ({ children }: any) => {
             })
             .catch((err) => console.error(err));
     };
-    return <CollecitonContext.Provider value={{ collection, notFound, loading, getCollection }}>{children}</CollecitonContext.Provider>;
+    const onSearchACollection = (input: string) => {
+        console.log(input);
+    };
+    return <CollecitonsContext.Provider value={{ collection, collections, collectionsSearch, notFound, loading, getCollection, onSearchACollection }}>{children}</CollecitonsContext.Provider>;
 };
-export { CollecitonContext, CollecitonProvider };
+export { CollecitonsContext, CollecitonProvider };

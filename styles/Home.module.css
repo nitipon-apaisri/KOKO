@@ -5,3 +5,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.container .ant-input-search input {
+    border-radius: 8px 0 0 8px;
+}
