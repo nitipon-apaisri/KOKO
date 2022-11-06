@@ -22,7 +22,7 @@ const Home = () => {
         <>
             <MetaHead />
             <div className={styles.container}>
-                <Title>Lookup A Collection</Title>
+                <Title>Explore a collection</Title>
                 <Search enterButton placeholder="E.g. 'what-the-by-kamwoonear'" onSearch={(value: string) => fetchCollection(value)} />
             </div>
         </>

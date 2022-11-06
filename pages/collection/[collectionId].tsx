@@ -5,7 +5,7 @@ import MetaHead from "../../components/MetaHead";
 import { MainProfileLayout } from "../../components/MainProfile";
 import { collectionObject } from "../../@types/collection";
 import { HoldersContext } from "../../contexts/HoldersContext";
-import { holderStats } from "../../@types/holders";
+import { Loading } from "../../components/Loading";
 
 const Collection = () => {
     const router = useRouter();
@@ -26,7 +26,7 @@ const Collection = () => {
             <MetaHead title={collection ? `Lookup | ${collection?.collection}` : "Collection not found"} description={collection ? collection?.description : "Collection not found"} />
             {(() => {
                 if (loading === true) {
-                    return <span>Loading</span>;
+                    return <Loading />;
                 }
                 if (notFound === true) {
                     return <span>404</span>;
