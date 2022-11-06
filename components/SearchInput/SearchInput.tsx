@@ -4,6 +4,11 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/SearchInput.module.css";
 import { collectionContextPartialProps, search } from "../../@types/collection";
 const SearchInput = ({ search, onSearch }: { search: search; onSearch: search | undefined }) => {
+    const whileSearching = (input: string) => {
+        if (input.length >= 3) {
+            if (onSearch) onSearch(input);
+        }
+    };
     return (
         <div className={styles.search_wrapper}>
             <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchIcon} />
@@ -13,7 +18,7 @@ const SearchInput = ({ search, onSearch }: { search: search; onSearch: search | 
                 className={styles.searchInput}
                 onPressEnter={(v: any) => search(v.target.value)}
                 onChange={(v) => {
-                    if (onSearch) onSearch(v.target.value);
+                    whileSearching(v.target.value);
                 }}
             />
         </div>

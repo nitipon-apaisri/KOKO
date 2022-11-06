@@ -10,7 +10,7 @@ const { Title } = Typography;
 
 const Home = () => {
     const router = useRouter();
-    const { collection, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
+    const { collection, collectionsSearch, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const fetchCollection = (collectionId: string) => {
         setTimeout(() => {
             router.push(`collection/${collectionId}`);
@@ -22,6 +22,7 @@ const Home = () => {
     return (
         <>
             <MetaHead />
+            {console.log(collectionsSearch)}
             <div className={`${styles.container}`}>
                 <Title>Explore a collection</Title>
                 <SearchInput search={fetchCollection} onSearch={onSearchACollection} />
