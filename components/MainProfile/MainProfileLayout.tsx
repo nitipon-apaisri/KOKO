@@ -6,6 +6,7 @@ import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
 import { holderStats } from "../../@types/holders";
 import { Spin } from "antd";
+import { Loading } from "../Loading";
 const MainProfileLayout = ({ collectionData, collectionId, holdersData, getHolderById }: { collectionData: collectionObject; collectionId: string; holdersData: []; getHolderById: any }) => {
     const [loading, setLoading] = React.useState(true);
     React.useEffect(() => {
@@ -16,6 +17,7 @@ const MainProfileLayout = ({ collectionData, collectionId, holdersData, getHolde
                 }
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     React.useEffect(() => {
         if (holdersData.length >= collectionData?.owner_ids.length) setLoading(false);
@@ -59,10 +61,10 @@ const MainProfileLayout = ({ collectionData, collectionId, holdersData, getHolde
             <div className={styles.profile_text_contents}>
                 <h4 className={`${styles.display_title} ${styles.display_text}`}>{collectionData?.collection}</h4>
                 <h5>Collection by {collectionData?.creator_id}</h5>
-                <p className={`${styles.display_description} ${styles.display_text}`}>{collectionData?.description}</p>
+                {/* <p className={`${styles.display_description} ${styles.display_text}`}>{collectionData?.description}</p> */}
             </div>
             <Stats stats={collectionData} />
-            {loading ? <Spin /> : <MainTable data={holdersData} columns={columns} />}
+            <div className={styles.table_warpper}>{loading ? <Loading /> : <MainTable data={holdersData} columns={columns} />}</div>
         </div>
     );
 };

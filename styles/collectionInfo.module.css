@@ -50,3 +50,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.table_warpper {
+    position: relative;
+    min-height: 400px;
+}
