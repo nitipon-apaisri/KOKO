@@ -1,4 +1,5 @@
 .search_wrapper {
+    background-color: #ffffff;
     width: 640px;
     border: 0.5px solid #dfdfdf;
     text-align: left;
@@ -7,10 +8,16 @@
     display: flex;
     align-items: center;
     margin: 0 auto;
+    transition-duration: 300ms;
 }
 .searchIcon {
     color: #c5c5c5;
 }
 .searchInput {
     width: 100%;
+}
+.search_wrapper:hover {
+    background-color: #ffffff;
+    border: 0.5px solid transparent;
+    box-shadow: 0px 18px 31px rgba(0, 0, 0, 0.06);
 }

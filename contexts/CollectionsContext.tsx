@@ -9,7 +9,7 @@ const CollecitonProvider = ({ children }: any) => {
     const [collectionsSearch, setCollectionSearch] = React.useState<{}[]>([]);
     const [notFound, setNotFound] = React.useState<boolean>(false);
     const [loading, setLoading] = React.useState<boolean>(true);
-
+    const [activeSuggestions, setActiveSuggestions] = React.useState<boolean>(false);
     const setOnSearchCollection = (data: onSearchCollectionsObject) => {
         setCollectionSearch((i: any) => [...i, data]);
     };
@@ -32,24 +32,34 @@ const CollecitonProvider = ({ children }: any) => {
             .catch((err) => console.error(err));
     };
     const onSearchACollection = (input: string) => {
-        setCollectionSearch([]);
-        parasApi
-            .get(`collections?collection_search=${input}`)
-            .then((res) => {
-                res.data.data.results.forEach((i: any) => {
-                    const dataObj = {
-                        _id: i._id,
-                        media: i.media,
-                        collection: i.collection,
-                        creator_id: i.creator_id,
-                        is_creator: i.is_creator,
-                    };
+        if (input.length >= 3) {
+            setActiveSuggestions(true);
+            setCollectionSearch([]);
+            parasApi
+                .get(`collections?collection_search=${input}`)
+                .then((res) => {
+                    res.data.data.results.forEach((i: any) => {
+                        const dataObj = {
+                            _id: i._id,
+                            media: i.media,
+                            collection: i.collection,
+                            creator_id: i.creator_id,
+                            is_creator: i.is_creator,
+                            collection_id: i.collection_id,
+                        };
 
-                    setOnSearchCollection(dataObj);
-                });
-            })
-            .catch((err) => console.error(err));
+                        setOnSearchCollection(dataObj);
+                    });
+                })
+                .catch((err) => console.error(err));
+        } else {
+            setActiveSuggestions(false);
+        }
     };
-    return <CollecitonsContext.Provider value={{ collection, collections, collectionsSearch, notFound, loading, getCollection, onSearchACollection }}>{children}</CollecitonsContext.Provider>;
+    return (
+        <CollecitonsContext.Provider value={{ collection, collections, collectionsSearch, notFound, loading, activeSuggestions, getCollection, onSearchACollection }}>
+            {children}
+        </CollecitonsContext.Provider>
+    );
 };
 export { CollecitonsContext, CollecitonProvider };

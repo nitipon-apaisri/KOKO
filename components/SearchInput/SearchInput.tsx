@@ -5,9 +5,7 @@ import styles from "../../styles/SearchInput.module.css";
 import { collectionContextPartialProps, search } from "../../@types/collection";
 const SearchInput = ({ search, onSearch }: { search: search; onSearch: search | undefined }) => {
     const whileSearching = (input: string) => {
-        if (input.length >= 3) {
-            if (onSearch) onSearch(input);
-        }
+        if (onSearch) onSearch(input);
     };
     return (
         <div className={styles.search_wrapper}>

@@ -33,3 +33,12 @@ export const genetateProfileMedias = ({cover, media}:{cover:string, media:string
     };
     return profileMedias
 } 
+export const generateAvatar = (media:string) => {
+    const avatar = {
+        pfp: {
+            backgroundColor: media ? "transparent" : "#e3e3e3",
+            backgroundImage: media ? `url(${concatMediaWithParasCDN(media)})` : "",
+        },
+    };
+    return avatar
+} 

@@ -2,6 +2,7 @@ export type collectionContextPartialProps = {
     collection: any;
     notFound: boolean;
     loading: boolean;
+    activeSuggestions: boolean
     collections: {}[]
     collectionsSearch: {}[]
     getCollection?: (collectionId: string) => void;
@@ -30,6 +31,7 @@ export interface onSearchCollectionsObject {
     collection: string
     creator_id: string
     is_creator: boolean
+    collection_id: string
 }
 
 export type search = (input:string) => void
