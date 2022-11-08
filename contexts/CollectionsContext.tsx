@@ -52,8 +52,10 @@ const CollecitonProvider = ({ children }: any) => {
                     });
                 })
                 .catch((err) => console.error(err));
-        } else {
+        }
+        if (input.length === 0) {
             setActiveSuggestions(false);
+            setCollectionSearch([]);
         }
     };
     return (
