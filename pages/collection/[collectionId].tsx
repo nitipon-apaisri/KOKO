@@ -3,13 +3,14 @@ import { useRouter } from "next/router";
 import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import MetaHead from "../../components/MetaHead";
 import { MainProfileLayout } from "../../components/MainProfile";
-import { collectionObject } from "../../@types/collection";
+import { collectionContextPartialProps, collectionObject } from "../../@types/collection";
 import { HoldersContext } from "../../contexts/HoldersContext";
 import { Loading } from "../../components/Loading";
+import { NotFound } from "../../components/NotFound";
 
 const Collection = () => {
     const router = useRouter();
-    const { collection, notFound, loading, getCollection } = React.useContext(CollecitonsContext);
+    const { collection, notFound, loading, getCollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const { holders, getHolderById } = React.useContext(HoldersContext);
     const { collectionId } = router.query;
     const collection_id: string = collectionId as string;
@@ -29,7 +30,7 @@ const Collection = () => {
                     return <Loading />;
                 }
                 if (notFound === true) {
-                    return <span>404</span>;
+                    return <NotFound />;
                 } else {
                     return <MainProfileLayout collectionData={collection as collectionObject} collectionId={collection_id} holdersData={holders} getHolderById={getHolderById} />;
                 }

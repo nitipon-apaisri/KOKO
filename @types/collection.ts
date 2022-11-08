@@ -3,6 +3,7 @@ export type collectionContextPartialProps = {
     notFound: boolean;
     loading: boolean;
     activeSuggestions: boolean
+    suggestionNotFound: boolean
     collections: {}[]
     collectionsSearch: {}[]
     getCollection?: (collectionId: string) => void;

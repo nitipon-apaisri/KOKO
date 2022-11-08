@@ -11,7 +11,7 @@ const { Title } = Typography;
 
 const Home = () => {
     const router = useRouter();
-    const { collection, collectionsSearch, activeSuggestions, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
+    const { collection, collectionsSearch, activeSuggestions, suggestionNotFound, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const fetchCollection = (collectionId: string) => {
         setTimeout(() => {
             router.push(`collection/${collectionId}`);
@@ -26,7 +26,7 @@ const Home = () => {
             <div className={`${styles.container}`}>
                 <Title>Explore a collection</Title>
                 <SearchInput search={fetchCollection} onSearch={onSearchACollection} />
-                {activeSuggestions && <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} />}
+                {activeSuggestions && <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} suggestionNotFound={suggestionNotFound as boolean} />}
             </div>
         </>
     );

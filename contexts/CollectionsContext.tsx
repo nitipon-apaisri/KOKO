@@ -10,6 +10,7 @@ const CollecitonProvider = ({ children }: any) => {
     const [notFound, setNotFound] = React.useState<boolean>(false);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [activeSuggestions, setActiveSuggestions] = React.useState<boolean>(false);
+    const [suggestionNotFound, setSuggestionNotFound] = React.useState<boolean>(false);
     const setOnSearchCollection = (data: onSearchCollectionsObject) => {
         setCollectionSearch((i: any) => [...i, data]);
     };
@@ -35,31 +36,37 @@ const CollecitonProvider = ({ children }: any) => {
         if (input.length >= 3) {
             setActiveSuggestions(true);
             setCollectionSearch([]);
+            setSuggestionNotFound(false);
             parasApi
                 .get(`collections?collection_search=${input}`)
                 .then((res) => {
-                    res.data.data.results.forEach((i: any) => {
-                        const dataObj = {
-                            _id: i._id,
-                            media: i.media,
-                            collection: i.collection,
-                            creator_id: i.creator_id,
-                            is_creator: i.is_creator,
-                            collection_id: i.collection_id,
-                        };
-
-                        setOnSearchCollection(dataObj);
-                    });
+                    if (res.data.data.results.length === 0) {
+                        setSuggestionNotFound(true);
+                    } else {
+                        res.data.data.results.forEach((i: any) => {
+                            const dataObj = {
+                                _id: i._id,
+                                media: i.media,
+                                collection: i.collection,
+                                creator_id: i.creator_id,
+                                is_creator: i.is_creator,
+                                collection_id: i.collection_id,
+                            };
+                            setSuggestionNotFound(false);
+                            setOnSearchCollection(dataObj);
+                        });
+                    }
                 })
                 .catch((err) => console.error(err));
         }
         if (input.length === 0) {
             setActiveSuggestions(false);
             setCollectionSearch([]);
+            setSuggestionNotFound(false);
         }
     };
     return (
-        <CollecitonsContext.Provider value={{ collection, collections, collectionsSearch, notFound, loading, activeSuggestions, getCollection, onSearchACollection }}>
+        <CollecitonsContext.Provider value={{ collection, collections, collectionsSearch, notFound, loading, activeSuggestions, suggestionNotFound, getCollection, onSearchACollection }}>
             {children}
         </CollecitonsContext.Provider>
     );
