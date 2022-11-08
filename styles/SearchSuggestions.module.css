@@ -1,6 +1,7 @@
 .suggestions_wrapper {
     position: relative;
     width: 100%;
+    max-width: 640px;
     border-radius: 8px;
     margin-top: 8px;
     background-color: #ffffff;
@@ -9,7 +10,12 @@
 }
 .suggestion_item {
     padding: 16px 24px;
+    text-align: left;
+    transition-duration: 300ms;
 }
 .item_bt_border {
     border-bottom: 0.5px solid #f1f1f1;
+}
+.suggestion_item:hover {
+    background-color: #f1f1f1;
 }
