@@ -1,6 +1,11 @@
 .container {
     width: 1280px;
     max-width: 1280px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    margin: 80px 0;
+    box-shadow: 0px 18px 31px rgba(0, 0, 0, 0.06);
 }
 .profile_medias_contents {
     position: relative;

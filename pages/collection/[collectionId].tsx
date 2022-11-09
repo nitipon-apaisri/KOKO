@@ -7,11 +7,12 @@ import { collectionContextPartialProps, collectionObject } from "../../@types/co
 import { HoldersContext } from "../../contexts/HoldersContext";
 import { Loading } from "../../components/Loading";
 import { NotFound } from "../../components/NotFound";
+import { holdersContextPartialProps, profile } from "../../@types/holders";
 
 const Collection = () => {
     const router = useRouter();
     const { collection, notFound, loading, getCollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
-    const { holders, getHolderById } = React.useContext(HoldersContext);
+    const { holders, profiles, getHolderById } = React.useContext(HoldersContext) as holdersContextPartialProps;
     const { collectionId } = router.query;
     const collection_id: string = collectionId as string;
 
@@ -32,7 +33,15 @@ const Collection = () => {
                 if (notFound === true) {
                     return <NotFound />;
                 } else {
-                    return <MainProfileLayout collectionData={collection as collectionObject} collectionId={collection_id} holdersData={holders} getHolderById={getHolderById} />;
+                    return (
+                        <MainProfileLayout
+                            collectionData={collection as collectionObject}
+                            collectionId={collection_id}
+                            holdersData={holders as []}
+                            profiles={profiles as profile[]}
+                            getHolderById={getHolderById}
+                        />
+                    );
                 }
             })()}
         </>

@@ -1,13 +1,25 @@
 import * as React from "react";
 import { collectionObject } from "../../@types/collection";
-import { genetateProfileMedias } from "../../utils/modules";
+import { genetateProfileMedias, replaceIPFSToParasCDN } from "../../utils/modules";
 import styles from "../../styles/collectionInfo.module.css";
 import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
-import { holderStats } from "../../@types/holders";
-import { Spin } from "antd";
+import { holderStats, profile } from "../../@types/holders";
+import { Avatar, Image, Space, Spin } from "antd";
 import { Loading } from "../Loading";
-const MainProfileLayout = ({ collectionData, collectionId, holdersData, getHolderById }: { collectionData: collectionObject; collectionId: string; holdersData: []; getHolderById: any }) => {
+const MainProfileLayout = ({
+    collectionData,
+    collectionId,
+    holdersData,
+    profiles,
+    getHolderById,
+}: {
+    collectionData: collectionObject;
+    collectionId: string;
+    holdersData: [];
+    profiles: profile[];
+    getHolderById: any;
+}) => {
     const [loading, setLoading] = React.useState(true);
     React.useEffect(() => {
         for (let i = 0; i < collectionData?.owner_ids.length; i++) {
@@ -21,7 +33,7 @@ const MainProfileLayout = ({ collectionData, collectionId, holdersData, getHolde
     }, []);
     React.useEffect(() => {
         if (holdersData.length >= collectionData?.owner_ids.length) setLoading(false);
-    }, [holdersData, collectionData?.owner_ids.length]);
+    }, [holdersData, collectionData?.owner_ids.length, profiles]);
     const columns = [
         {
             title: "Wallet",
@@ -34,6 +46,19 @@ const MainProfileLayout = ({ collectionData, collectionId, holdersData, getHolde
                     return 1;
                 }
                 return 0;
+            },
+            render: (v: string) => {
+                const index = profiles?.findIndex((i: profile) => i.accountId === v);
+                return (
+                    <>
+                        {index !== -1 && (
+                            <Space>
+                                <Avatar src={`${replaceIPFSToParasCDN(profiles[index].imgUrl)}`} />
+                                <span>{v}</span>
+                            </Space>
+                        )}
+                    </>
+                );
             },
         },
         {

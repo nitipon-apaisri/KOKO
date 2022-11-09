@@ -1,8 +1,16 @@
 export type holdersContextPartialProps = {
-    holders: any
+    holders: {}[]
+    profiles: {}[]
     getHolderById?: (holderId: string, collectionId: string) => void
 }
 export interface holderStats {
     wallet: string
     holding: number
+}
+
+export interface profile {
+    _id: string
+    accountId: string
+    imgUrl:string
+    
 }

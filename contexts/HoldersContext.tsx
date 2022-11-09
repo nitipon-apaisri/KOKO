@@ -1,12 +1,16 @@
 import * as React from "react";
-import { holdersContextPartialProps, holderStats } from "../@types/holders";
+import { holdersContextPartialProps, holderStats, profile } from "../@types/holders";
 import { parasApi } from "../api";
 
-const HoldersContext = React.createContext<Partial<holdersContextPartialProps>>({});
+const HoldersContext = React.createContext<holdersContextPartialProps | null>(null);
 const HoldersProvider = ({ children }: any) => {
-    const [holders, setHolder] = React.useState<any>([]);
+    const [holders, setHolder] = React.useState<holderStats[]>([]);
+    const [profiles, setProfiles] = React.useState<profile[]>([]);
     const setHolderStats = (holderObj: holderStats) => {
         setHolder((i: any) => [...i, holderObj]);
+    };
+    const setProfile = (profileObj: profile) => {
+        setProfiles((i: any) => [...i, profileObj]);
     };
     const getHolderById = async (holderId: string, collectionId: string) => {
         parasApi
@@ -16,12 +20,26 @@ const HoldersProvider = ({ children }: any) => {
                     wallet: holderId,
                     holding: res.data.data.results.length,
                 };
+                getProfileById(holderId);
                 setHolderStats(dataObj);
             })
             .catch((err) => console.error(err));
     };
-
-    return <HoldersContext.Provider value={{ holders, getHolderById }}>{children}</HoldersContext.Provider>;
+    const getProfileById = async (accountId: string) => {
+        parasApi
+            .get(`profiles?accountId=${accountId}`)
+            .then((res) => {
+                const { _id, accountId, imgUrl } = res.data.data.results[0];
+                const dataObj = {
+                    _id: _id,
+                    accountId: accountId,
+                    imgUrl: imgUrl,
+                };
+                setProfile(dataObj);
+            })
+            .catch((err) => console.error(err));
+    };
+    return <HoldersContext.Provider value={{ holders, profiles, getHolderById }}>{children}</HoldersContext.Provider>;
 };
 
 export { HoldersContext, HoldersProvider };
