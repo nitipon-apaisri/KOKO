@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/SearchInput.module.css";
 import { search } from "../../@types/collection";
-const SearchInput = ({ search, onSearch }: { search: search; onSearch: search | undefined }) => {
+const SearchInput = ({ search, onSearch, pathName }: { search: search; onSearch: search | undefined; pathName: string }) => {
     const [searchValue, setSearchValue] = React.useState<string>("");
     const [timer, setTimer] = React.useState<any>(null);
     const whileSearching = (input: string) => {
@@ -19,7 +19,7 @@ const SearchInput = ({ search, onSearch }: { search: search; onSearch: search | 
         setTimer(newTimer);
     };
     return (
-        <div className={styles.search_wrapper}>
+        <div className={pathName !== "/" ? styles.search_wrapper_secondary : styles.search_wrapper_primary}>
             <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchIcon} />
             <Input
                 placeholder="E.g. 'what-the-by-kamwoonear'"

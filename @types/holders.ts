@@ -5,7 +5,7 @@ export type holdersContextPartialProps = {
 }
 export interface holderStats {
     wallet: string
-    holding: number
+    owned: number
 }
 
 export interface profile {

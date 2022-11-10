@@ -7,7 +7,7 @@ import { MainTable } from "../MainTable";
 import { holderStats, profile } from "../../@types/holders";
 import { Avatar, Image, Space, Spin } from "antd";
 import { Loading } from "../Loading";
-const MainProfileLayout = ({
+const CollectionProfileLayout = ({
     collectionData,
     collectionId,
     holdersData,
@@ -62,14 +62,15 @@ const MainProfileLayout = ({
             },
         },
         {
-            title: "Holding",
-            dataIndex: "holding",
+            title: "Owned",
+            dataIndex: "owned",
             width: "10%",
+            align: "right",
             sorter: (a: any, b: any) => {
-                if (a.holding < b.holding) {
+                if (a.owned < b.owned) {
                     return -1;
                 }
-                if (a.holding > b.holding) {
+                if (a.owned > b.owned) {
                     return 1;
                 }
                 return 0;
@@ -94,4 +95,4 @@ const MainProfileLayout = ({
     );
 };
 
-export default MainProfileLayout;
+export default CollectionProfileLayout;

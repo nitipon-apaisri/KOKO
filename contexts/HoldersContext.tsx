@@ -18,7 +18,7 @@ const HoldersProvider = ({ children }: any) => {
             .then((res) => {
                 const dataObj = {
                     wallet: holderId,
-                    holding: res.data.data.results.length,
+                    owned: res.data.data.results.length,
                 };
                 getProfileById(holderId);
                 setHolderStats(dataObj);

@@ -1,4 +1,16 @@
-.search_wrapper {
+.search_wrapper_primary {
+    background-color: #ffffff;
+    width: 640px;
+    border: 0.5px solid #dfdfdf;
+    text-align: left;
+    padding: 4px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    transition-duration: 300ms;
+}
+.search_wrapper_secondary {
     background-color: #ffffff;
     width: 640px;
     border: 0.5px solid #dfdfdf;
@@ -16,7 +28,7 @@
 .searchInput {
     width: 100%;
 }
-.search_wrapper:hover {
+.search_wrapper_primary:hover {
     background-color: #ffffff;
     border: 0.5px solid transparent;
     box-shadow: 0px 18px 31px rgba(0, 0, 0, 0.06);

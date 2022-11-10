@@ -9,9 +9,7 @@ import { concatMediaWithParasCDN } from "../../utils/modules";
 import Link from "next/link";
 import { DataEmpty } from "../Empty";
 const SearchSuggestions = ({ collectionsSearch, suggestionNotFound }: { collectionsSearch: onSearchCollectionsObject[]; suggestionNotFound: boolean }) => {
-    React.useEffect(() => {
-        console.log(suggestionNotFound, collectionsSearch.length);
-    }, [suggestionNotFound, collectionsSearch]);
+    React.useEffect(() => {}, [suggestionNotFound, collectionsSearch]);
     return (
         <div className={styles.suggestions_wrapper}>
             {(() => {
