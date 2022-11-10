@@ -4,10 +4,10 @@ import { parasApi } from "../api";
 
 const HoldersContext = React.createContext<holdersContextPartialProps | null>(null);
 const HoldersProvider = ({ children }: any) => {
-    const [holders, setHolder] = React.useState<holderStats[]>([]);
+    const [holders, setHolders] = React.useState<holderStats[]>([]);
     const [profiles, setProfiles] = React.useState<profile[]>([]);
     const setHolderStats = (holderObj: holderStats) => {
-        setHolder((i: any) => [...i, holderObj]);
+        setHolders((i: any) => [...i, holderObj]);
     };
     const setProfile = (profileObj: profile) => {
         setProfiles((i: any) => [...i, profileObj]);
@@ -39,7 +39,13 @@ const HoldersProvider = ({ children }: any) => {
             })
             .catch((err) => console.error(err));
     };
-    return <HoldersContext.Provider value={{ holders, profiles, getHolderById }}>{children}</HoldersContext.Provider>;
+    const clearHolders = () => {
+        setHolders([]);
+    };
+    const clearProfiles = () => {
+        setProfiles([]);
+    };
+    return <HoldersContext.Provider value={{ holders, profiles, clearHolders, clearProfiles, getHolderById }}>{children}</HoldersContext.Provider>;
 };
 
 export { HoldersContext, HoldersProvider };

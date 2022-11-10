@@ -4,6 +4,12 @@
     justify-content: space-between;
     align-items: center;
 }
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: rgb(230, 230, 230);
+}
 .search_input {
     max-height: 40px;
 }

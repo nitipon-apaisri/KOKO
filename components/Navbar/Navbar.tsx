@@ -5,6 +5,8 @@ import { SearchInput } from "../SearchInput";
 import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import { collectionContextPartialProps, onSearchCollectionsObject } from "../../@types/collection";
 import { SearchSuggestions } from "../SearchSuggestions";
+import { Space } from "antd";
+import Link from "next/link";
 const Navbar = () => {
     const router = useRouter();
     const pathName = router.pathname;
@@ -16,16 +18,21 @@ const Navbar = () => {
     };
     return (
         <nav className={styles.menu}>
-            <div className={styles.search_input}>
-                {pathName !== "/" && (
-                    <>
-                        <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
-                        {activeSuggestions && pathName !== "/" && (
-                            <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} suggestionNotFound={suggestionNotFound as boolean} />
-                        )}
-                    </>
-                )}
-            </div>
+            <Space>
+                <Link href={`/`}>
+                    <div className={styles.logo}></div>
+                </Link>
+                <div className={styles.search_input}>
+                    {pathName !== "/" && (
+                        <>
+                            <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
+                            {activeSuggestions && pathName !== "/" && (
+                                <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} suggestionNotFound={suggestionNotFound as boolean} />
+                            )}
+                        </>
+                    )}
+                </div>
+            </Space>
             <ul className={styles.menu_list}>
                 <li className={styles.menu_item}>Collection</li>
                 <li className={styles.menu_item}>Creator</li>

@@ -4,8 +4,8 @@ import { genetateProfileMedias, replaceIPFSToParasCDN } from "../../utils/module
 import styles from "../../styles/collectionInfo.module.css";
 import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
-import { holderStats, profile } from "../../@types/holders";
-import { Avatar, Image, Space, Spin } from "antd";
+import { profile } from "../../@types/holders";
+import { Avatar, Space } from "antd";
 import { Loading } from "../Loading";
 const CollectionProfileLayout = ({
     collectionData,
