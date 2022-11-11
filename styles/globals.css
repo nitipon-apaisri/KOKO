@@ -25,3 +25,6 @@ a {
 .ant-layout {
     background: #edf2f8;
 }
+.ant-layout-header {
+    display: flex;
+}

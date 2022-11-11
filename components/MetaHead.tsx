@@ -15,9 +15,9 @@ const MetaHead = ({ title, description }: { title: string; keywords: string; des
 };
 
 MetaHead.defaultProps = {
-    title: "Sato - Collections Lookup",
+    title: "BJÖRN - The Collections Explorer",
     keywords: "web nft marketplace",
-    description: "Sato is an application to lookup nft collections from Paras Marketplace",
+    description: "BJÖRN is a web application for lookup nft collections from Paras Marketplace",
 };
 
 export default MetaHead;

@@ -1,8 +1,12 @@
 .menu {
     max-height: 80px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    width: 1440px;
+    margin: 0 auto;
+}
+.menu_home {
+    width: 100%;
 }
 .logo {
     width: 40px;
@@ -12,6 +16,8 @@
 }
 .search_input {
     max-height: 40px;
+    width: 100%;
+    margin: 0 0 0 24px;
 }
 .menu_list {
     display: flex;

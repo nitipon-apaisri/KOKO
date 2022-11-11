@@ -22,7 +22,7 @@ const SearchInput = ({ search, onSearch, pathName }: { search: search; onSearch:
         <div className={pathName !== "/" ? styles.search_wrapper_secondary : styles.search_wrapper_primary}>
             <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchIcon} />
             <Input
-                placeholder="E.g. 'what-the-by-kamwoonear'"
+                placeholder="Find Me..."
                 bordered={false}
                 className={styles.searchInput}
                 onPressEnter={(v: any) => search(v.target.value)}

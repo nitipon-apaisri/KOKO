@@ -17,26 +17,25 @@ const Navbar = () => {
         }, 200);
     };
     return (
-        <nav className={styles.menu}>
-            <Space>
-                <Link href={`/`}>
-                    <div className={styles.logo}></div>
-                </Link>
-                <div className={styles.search_input}>
-                    {pathName !== "/" && (
-                        <>
-                            <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
-                            {activeSuggestions && pathName !== "/" && (
-                                <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} suggestionNotFound={suggestionNotFound as boolean} />
-                            )}
-                        </>
-                    )}
-                </div>
-            </Space>
-            <ul className={styles.menu_list}>
+        <nav className={pathName === "/" ? `${styles.menu} ${styles.menu_home}` : styles.menu}>
+            <Space></Space>
+            <Link href={`/`}>
+                <div className={styles.logo}></div>
+            </Link>
+            <div className={styles.search_input}>
+                {pathName !== "/" && (
+                    <>
+                        <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
+                        {activeSuggestions && pathName !== "/" && (
+                            <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} suggestionNotFound={suggestionNotFound as boolean} />
+                        )}
+                    </>
+                )}
+            </div>
+            {/* <ul className={styles.menu_list}>
                 <li className={styles.menu_item}>Collection</li>
                 <li className={styles.menu_item}>Creator</li>
-            </ul>
+            </ul> */}
         </nav>
     );
 };
