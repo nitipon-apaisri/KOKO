@@ -12,6 +12,7 @@ export type collectionContextPartialProps = {
 export interface collectionObject {
     _id: string;
     collection: string;
+    collection_id: string;
     creator_id: string;
     description: string;
     cover:string

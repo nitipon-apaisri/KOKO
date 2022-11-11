@@ -1,6 +1,6 @@
 export type holdersContextPartialProps = {
-    holders: {}[]
-    profiles: {}[]
+    holders: holderStats[]
+    profiles: profile[]
     clearHolders?: () => void
     clearProfiles?: () => void
     getHolderById?: (holderId: string, collectionId: string) => void

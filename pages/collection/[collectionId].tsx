@@ -3,17 +3,13 @@ import { useRouter } from "next/router";
 import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import MetaHead from "../../components/MetaHead";
 import { CollectionProfileLayout } from "../../components/CollectionProfile";
-import { collectionContextPartialProps, collectionObject } from "../../@types/collection";
-import { HoldersContext } from "../../contexts/HoldersContext";
+import { collectionContextPartialProps } from "../../@types/collection";
 import { Loading } from "../../components/Loading";
 import { NotFound } from "../../components/NotFound";
-import { holdersContextPartialProps, profile } from "../../@types/holders";
 
 const Collection = () => {
     const router = useRouter();
-    const pathName = router.pathname;
     const { collection, notFound, loading, getCollection, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
-    const { holders, profiles, getHolderById } = React.useContext(HoldersContext) as holdersContextPartialProps;
     const { collectionId } = router.query;
     const collection_id: string = collectionId as string;
 
@@ -37,15 +33,7 @@ const Collection = () => {
                 if (notFound === true) {
                     return <NotFound />;
                 } else {
-                    return (
-                        <CollectionProfileLayout
-                            collectionData={collection as collectionObject}
-                            collectionId={collection_id}
-                            holdersData={holders as []}
-                            profiles={profiles as profile[]}
-                            getHolderById={getHolderById}
-                        />
-                    );
+                    return <CollectionProfileLayout />;
                 }
             })()}
         </>

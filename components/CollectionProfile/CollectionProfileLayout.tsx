@@ -1,39 +1,40 @@
 import * as React from "react";
-import { collectionObject } from "../../@types/collection";
+import { collectionContextPartialProps, collectionObject } from "../../@types/collection";
 import { genetateProfileMedias, replaceIPFSToParasCDN } from "../../utils/modules";
 import styles from "../../styles/collectionInfo.module.css";
 import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
-import { profile } from "../../@types/holders";
+import { holdersContextPartialProps, profile } from "../../@types/holders";
 import { Avatar, Space } from "antd";
 import { Loading } from "../Loading";
-const CollectionProfileLayout = ({
-    collectionData,
-    collectionId,
-    holdersData,
-    profiles,
-    getHolderById,
-}: {
-    collectionData: collectionObject;
-    collectionId: string;
-    holdersData: [];
-    profiles: profile[];
-    getHolderById: any;
-}) => {
+import { CollecitonsContext } from "../../contexts/CollectionsContext";
+import { useRouter } from "next/router";
+import { HoldersContext } from "../../contexts/HoldersContext";
+const CollectionProfileLayout = () => {
+    const route = useRouter();
+    const { collectionId } = route.query;
+    const collection_id: string = collectionId as string;
     const [loading, setLoading] = React.useState(true);
+    const { collection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
+    const { holders, profiles, getHolderById } = React.useContext(HoldersContext) as holdersContextPartialProps;
     React.useEffect(() => {
-        for (let i = 0; i < collectionData?.owner_ids.length; i++) {
+        for (let i = 0; i < collection?.owner_ids.length; i++) {
             if (getHolderById) {
-                if (i <= collectionData?.owner_ids.length) {
-                    getHolderById(collectionData?.owner_ids[i], collectionId);
+                if (i <= collection?.owner_ids.length) {
+                    getHolderById(collection?.owner_ids[i], collection_id);
                 }
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     React.useEffect(() => {
-        if (holdersData.length >= collectionData?.owner_ids.length) setLoading(false);
-    }, [holdersData, collectionData?.owner_ids.length, profiles]);
+        if (holders.length >= collection?.owner_ids.length) setLoading(false);
+    }, [holders, collection?.owner_ids.length, profiles]);
+    React.useEffect(() => {
+        if (collection_id !== collection?.collection_id) {
+            window.location.reload();
+        }
+    }, [collection_id, collection]);
     const columns = [
         {
             title: "Wallet",
@@ -80,17 +81,17 @@ const CollectionProfileLayout = ({
     return (
         <div className={styles.container}>
             <div className={styles.profile_medias_contents}>
-                <div style={genetateProfileMedias(collectionData).bgImg} className={styles.cover}>
-                    <div style={genetateProfileMedias(collectionData).pfp} className={styles.pfp}></div>
+                <div style={genetateProfileMedias(collection).bgImg} className={styles.cover}>
+                    <div style={genetateProfileMedias(collection).pfp} className={styles.pfp}></div>
                 </div>
             </div>
             <div className={styles.profile_text_contents}>
-                <h4 className={`${styles.display_title} ${styles.display_text}`}>{collectionData?.collection}</h4>
-                <h5>Collection by {collectionData?.creator_id}</h5>
-                {/* <p className={`${styles.display_description} ${styles.display_text}`}>{collectionData?.description}</p> */}
+                <h4 className={`${styles.display_title} ${styles.display_text}`}>{collection?.collection}</h4>
+                <h5>Collection by {collection?.creator_id}</h5>
+                {/* <p className={`${styles.display_description} ${styles.display_text}`}>{collection?.description}</p> */}
             </div>
-            <Stats stats={collectionData} />
-            <div className={styles.table_warpper}>{loading ? <Loading /> : <MainTable data={holdersData} columns={columns} />}</div>
+            <Stats stats={collection} />
+            <div className={styles.table_warpper}>{loading ? <Loading /> : <MainTable data={holders} columns={columns} />}</div>
         </div>
     );
 };
