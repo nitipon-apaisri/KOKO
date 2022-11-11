@@ -18,10 +18,10 @@ const Navbar = () => {
     };
     return (
         <nav className={pathName === "/" ? `${styles.menu} ${styles.menu_home}` : styles.menu}>
-            <Space></Space>
             <Link href={`/`}>
                 <div className={styles.logo}></div>
             </Link>
+
             <div className={styles.search_input}>
                 {pathName !== "/" && (
                     <>

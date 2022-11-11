@@ -14,10 +14,10 @@ const Collection = () => {
     const collection_id: string = collectionId as string;
 
     React.useEffect(() => {
-        if (!collection && collection_id !== undefined) {
+        if (collection?.collection_id !== collectionId) {
             if (getCollection) getCollection(collection_id);
         }
-    }, [collection, getCollection, collection_id, notFound]);
+    }, [collection, getCollection, collection_id, collectionId]);
     React.useEffect(() => {
         if (onSearchACollection) onSearchACollection("");
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,7 +32,8 @@ const Collection = () => {
                 }
                 if (notFound === true) {
                     return <NotFound />;
-                } else {
+                }
+                if (collection) {
                     return <CollectionProfileLayout />;
                 }
             })()}

@@ -30,11 +30,6 @@ const CollectionProfileLayout = () => {
     React.useEffect(() => {
         if (holders.length >= collection?.owner_ids.length) setLoading(false);
     }, [holders, collection?.owner_ids.length, profiles]);
-    React.useEffect(() => {
-        if (collection_id !== collection?.collection_id) {
-            window.location.reload();
-        }
-    }, [collection_id, collection]);
     const columns = [
         {
             title: "Wallet",
