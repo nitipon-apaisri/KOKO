@@ -24,7 +24,6 @@ const Collection = () => {
     }, []);
     return (
         <>
-            {/* TODO: Add meta head and interface for respone object */}
             <MetaHead title={collection ? `Lookup | ${collection?.collection}` : "Collection not found"} description={collection ? collection?.description : "Collection not found"} />
             {(() => {
                 if (loading === true) {

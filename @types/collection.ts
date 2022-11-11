@@ -6,6 +6,7 @@ export type collectionContextPartialProps = {
     suggestionNotFound: boolean
     collections: {}[]
     collectionsSearch: {}[]
+    clearCollection?: () => void 
     getCollection?: (collectionId: string) => void;
     onSearchACollection?: (input: string) => void
 }

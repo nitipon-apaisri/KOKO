@@ -11,3 +11,9 @@
     padding: 0 50px;
     background-color: #ffffff;
 }
+@media only screen and (max-width: 1440px) {
+    .wrapper {
+        padding: 0 50px;
+        width: 100%;
+    }
+}

@@ -43,6 +43,10 @@ const CollectionProfileLayout = () => {
                 }
                 return 0;
             },
+            ellipsis: {
+                showTitle: false,
+            },
+            width: "80%",
             render: (v: string) => {
                 const index = profiles?.findIndex((i: profile) => i.accountId === v);
                 return (
@@ -60,7 +64,6 @@ const CollectionProfileLayout = () => {
         {
             title: "Owned",
             dataIndex: "owned",
-            width: "10%",
             align: "right",
             sorter: (a: any, b: any) => {
                 if (a.owned < b.owned) {

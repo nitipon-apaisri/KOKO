@@ -59,3 +59,8 @@
     position: relative;
     min-height: 400px;
 }
+@media only screen and (max-width: 1440px) {
+    .container {
+        width: 100%;
+    }
+}
