@@ -7,6 +7,7 @@ export type collectionContextPartialProps = {
     collections: {}[]
     collectionsSearch: {}[]
     clearCollection?: () => void 
+    hideActiveSuggestions?: () => void
     getCollection?: (collectionId: string) => void;
     onSearchACollection?: (input: string) => void
 }

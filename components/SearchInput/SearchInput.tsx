@@ -7,16 +7,21 @@ import { search } from "../../@types/collection";
 const SearchInput = ({ search, onSearch, pathName }: { search: search; onSearch: search | undefined; pathName: string }) => {
     const [searchValue, setSearchValue] = React.useState<string>("");
     const [timer, setTimer] = React.useState<any>(null);
-    const whileSearching = (input: string) => {
+    const searchCollection = (input: string) => {
         if (input.length === 0) {
             if (onSearch) onSearch(input);
         }
-        setSearchValue(input);
         clearTimeout(timer);
         const newTimer = setTimeout(() => {
             if (onSearch) onSearch(input);
-        }, 500);
+        }, 150);
         setTimer(newTimer);
+    };
+    const whileSearching = (input: string) => {
+        searchCollection(input);
+    };
+    const clickSearch = (input: string) => {
+        searchCollection(input);
     };
     return (
         <div className={pathName !== "/" ? styles.search_wrapper_secondary : styles.search_wrapper_primary}>
@@ -29,6 +34,7 @@ const SearchInput = ({ search, onSearch, pathName }: { search: search; onSearch:
                 onChange={(v) => {
                     whileSearching(v.target.value);
                 }}
+                onClick={(v: any) => clickSearch(v.target.value)}
             />
         </div>
     );

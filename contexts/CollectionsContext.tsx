@@ -68,9 +68,12 @@ const CollecitonProvider = ({ children }: any) => {
     const clearCollection = () => {
         setCollection(undefined);
     };
+    const hideActiveSuggestions = () => {
+        setActiveSuggestions(false);
+    };
     return (
         <CollecitonsContext.Provider
-            value={{ collection, collections, collectionsSearch, notFound, loading, activeSuggestions, suggestionNotFound, clearCollection, getCollection, onSearchACollection }}
+            value={{ collection, collections, collectionsSearch, notFound, loading, activeSuggestions, suggestionNotFound, hideActiveSuggestions, clearCollection, getCollection, onSearchACollection }}
         >
             {children}
         </CollecitonsContext.Provider>

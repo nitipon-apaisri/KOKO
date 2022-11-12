@@ -27,7 +27,7 @@ const Home = () => {
             <div className={`${styles.container}`}>
                 <Title>Explore a collection</Title>
                 <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
-                {activeSuggestions && <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} suggestionNotFound={suggestionNotFound as boolean} />}
+                {activeSuggestions && <SearchSuggestions />}
             </div>
         </>
     );
