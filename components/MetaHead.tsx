@@ -1,11 +1,11 @@
 import React from "react";
 import Head from "next/head";
 
-const MetaHead = ({ title, keywords, description }: { title: string; keywords: string; description: string }) => {
+const MetaHead = ({ title, description }: { title: string; keywords: string; description: string }) => {
     return (
         <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <meta name="keywords" content={keywords} />
+            <meta name="keywords" content="web nft marketplace" />
             <meta name="description" content={description} />
             <meta charSet="utf-8" />
             <link rel="icon" href="/favicon.ico" />
@@ -15,9 +15,9 @@ const MetaHead = ({ title, keywords, description }: { title: string; keywords: s
 };
 
 MetaHead.defaultProps = {
-    title: "Sato - Collections Lookup",
+    title: "KOKO - The Collections Explorer",
     keywords: "web nft marketplace",
-    description: "Sato is an application to lookup nft collections from Paras Marketplace",
+    description: "KOKO is a web application for lookup nft collections from Paras Marketplace",
 };
 
 export default MetaHead;

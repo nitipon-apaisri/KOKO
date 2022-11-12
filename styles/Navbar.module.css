@@ -1,0 +1,36 @@
+.menu {
+    max-height: 80px;
+    display: flex;
+    align-items: center;
+    width: 1440px;
+    margin: 0 auto;
+}
+.menu_home {
+    width: 100%;
+}
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-image: url("../assets/logo-color.png");
+    background-position: center;
+    background-size: cover;
+    background-color: rgb(230, 230, 230);
+
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.08);
+}
+.search_input {
+    max-height: 40px;
+    width: 100%;
+    margin: 0 0 0 24px;
+}
+.menu_list {
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
+    margin-bottom: 0;
+    font-weight: bolder;
+}
+.menu_item {
+    margin-right: 16px;
+}

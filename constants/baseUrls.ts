@@ -1,0 +1,1 @@
+export const parasCDN = "https://paras-cdn.imgix.net/"

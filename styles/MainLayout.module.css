@@ -1,9 +1,23 @@
-.wrapper {
-    max-width: 2560px;
-    margin: auto;
+.layout {
     min-height: 100vh;
+}
+.wrapper {
+    max-width: 1440px;
+    height: 100%;
+    margin: auto;
+    background: #edf2f8;
 }
 .header {
     padding: 0 50px;
-    background-color: azure;
+    background-color: #ffffff;
+}
+.footer {
+    background-color: #fcfcfc;
+    text-align: center;
+}
+@media only screen and (max-width: 1440px) {
+    .wrapper {
+        padding: 0 50px;
+        width: 100%;
+    }
 }
