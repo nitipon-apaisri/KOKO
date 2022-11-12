@@ -10,10 +10,11 @@ import Link from "next/link";
 const Navbar = () => {
     const router = useRouter();
     const pathName = router.pathname;
-    const { collectionsSearch, activeSuggestions, suggestionNotFound, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
+    const { activeSuggestions, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const fetchCollection = (collectionId: string) => {
+        router.push(`${collectionId}`);
         setTimeout(() => {
-            router.push(`collection/${collectionId}`);
+            window.location.reload();
         }, 200);
     };
     return (
