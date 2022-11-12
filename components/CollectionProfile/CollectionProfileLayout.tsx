@@ -21,16 +21,19 @@ const CollectionProfileLayout = () => {
     React.useEffect(() => {
         for (let i = 0; i < collection?.owner_ids.length; i++) {
             if (getHolderById) {
-                if (i <= collection?.owner_ids.length) {
-                    getHolderById(collection?.owner_ids[i], collection_id);
-                }
+                getHolderById(collection?.owner_ids[i], collection_id);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     React.useEffect(() => {
-        if (holders.length >= collection?.owner_ids.length) setLoading(false);
-    }, [holders, collection?.owner_ids.length, profiles]);
+        if (collection?.owner_ids.length > 10) {
+            if (holders.length >= 10) setLoading(false);
+        }
+        if (collection?.owner_ids.length <= 10) {
+            if (holders.length === collection?.owner_ids.length) setLoading(false);
+        }
+    }, [holders, collection]);
     const updateWindowSize = () => {
         setWidth(window.innerWidth);
     };
@@ -54,19 +57,19 @@ const CollectionProfileLayout = () => {
                 showTitle: false,
             },
             width: "80%",
-            render: (v: string) => {
-                const index = profiles?.findIndex((i: profile) => i.accountId === v);
-                return (
-                    <>
-                        {index !== -1 && (
-                            <Space>
-                                <Avatar src={`${replaceIPFSToParasCDN(profiles[index].imgUrl)}`} />
-                                <span>{v}</span>
-                            </Space>
-                        )}
-                    </>
-                );
-            },
+            // render: (v: string) => {
+            //     // const index = profiles?.findIndex((i: profile) => i.accountId === v);
+            //     return (
+            //         <>
+            //             {index !== -1 && (
+            //                 <Space>
+            //                     {/* <Avatar src={`${replaceIPFSToParasCDN(profiles[index].imgUrl)}`} /> */}
+            //                     <span>{v}</span>
+            //                 </Space>
+            //             )}
+            //         </>
+            //     );
+            // },
         },
         {
             title: "Owned",
