@@ -7,21 +7,24 @@ import { search } from "../../@types/collection";
 const SearchInput = ({ search, onSearch, pathName }: { search: search; onSearch: search | undefined; pathName: string }) => {
     const [searchValue, setSearchValue] = React.useState<string>("");
     const [timer, setTimer] = React.useState<any>(null);
-    const searchCollection = (input: string) => {
+    const searchCollection = (input: string, type: string) => {
         if (input.length === 0) {
             if (onSearch) onSearch(input);
         }
         clearTimeout(timer);
-        const newTimer = setTimeout(() => {
-            if (onSearch) onSearch(input);
-        }, 150);
+        const newTimer = setTimeout(
+            () => {
+                if (onSearch) onSearch(input);
+            },
+            type === "click" ? 250 : 500
+        );
         setTimer(newTimer);
     };
     const whileSearching = (input: string) => {
-        searchCollection(input);
+        searchCollection(input, "typing");
     };
     const clickSearch = (input: string) => {
-        searchCollection(input);
+        searchCollection(input, "click");
     };
     return (
         <div className={pathName !== "/" ? styles.search_wrapper_secondary : styles.search_wrapper_primary}>
