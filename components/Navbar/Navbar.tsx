@@ -26,9 +26,7 @@ const Navbar = () => {
                 {pathName !== "/" && (
                     <>
                         <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
-                        {activeSuggestions && pathName !== "/" && (
-                            <SearchSuggestions collectionsSearch={collectionsSearch as onSearchCollectionsObject[]} suggestionNotFound={suggestionNotFound as boolean} />
-                        )}
+                        {activeSuggestions && pathName !== "/" && <SearchSuggestions />}
                     </>
                 )}
             </div>
