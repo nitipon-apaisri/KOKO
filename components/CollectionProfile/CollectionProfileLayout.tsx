@@ -15,6 +15,7 @@ const CollectionProfileLayout = () => {
     const { collectionId } = route.query;
     const collection_id: string = collectionId as string;
     const [loading, setLoading] = React.useState(true);
+    const [width, setWidth] = React.useState(0);
     const { collection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const { holders, profiles, getHolderById } = React.useContext(HoldersContext) as holdersContextPartialProps;
     React.useEffect(() => {
@@ -30,6 +31,12 @@ const CollectionProfileLayout = () => {
     React.useEffect(() => {
         if (holders.length >= collection?.owner_ids.length) setLoading(false);
     }, [holders, collection?.owner_ids.length, profiles]);
+    const updateWindowSize = () => {
+        setWidth(window.innerWidth);
+    };
+    React.useEffect(() => {
+        window.addEventListener("resize", updateWindowSize);
+    }, []);
     const columns = [
         {
             title: "Wallet",
@@ -65,6 +72,7 @@ const CollectionProfileLayout = () => {
             title: "Owned",
             dataIndex: "owned",
             align: "right",
+            width: width <= 960 ? "20%" : "10%",
             sorter: (a: any, b: any) => {
                 if (a.owned < b.owned) {
                     return -1;
