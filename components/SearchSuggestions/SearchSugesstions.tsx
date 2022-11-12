@@ -30,7 +30,7 @@ const SearchSuggestions = ({ collectionsSearch, suggestionNotFound }: { collecti
                             <Link href={pathName !== "/" ? `${r.collection_id}` : `collection/${r.collection_id}`} key={r._id} onClick={() => reload()}>
                                 <div className={`${styles.suggestion_item} ${styles.item_bt_border}`}>
                                     <Space>
-                                        <Avatar src={`${concatMediaWithParasCDN(r.media.toString())}`} style={{ border: "1px solid #dfdfdf" }} />
+                                        <Avatar src={`${concatMediaWithParasCDN(r.media)}`} style={{ border: "1px solid #dfdfdf" }} />
                                         <h4>{r.collection}</h4>
                                         {r.is_creator && (
                                             <Tooltip title="Creator verified">

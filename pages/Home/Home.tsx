@@ -12,20 +12,15 @@ const { Title } = Typography;
 const Home = () => {
     const router = useRouter();
     const pathName = router.pathname;
-    const { collectionsSearch, activeSuggestions, suggestionNotFound, onSearchACollection, clearCollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
+    const { collection, collectionsSearch, activeSuggestions, suggestionNotFound, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const fetchCollection = (collectionId: string) => {
         setTimeout(() => {
             router.push(`collection/${collectionId}`);
         }, 200);
     };
-    const clear = React.useCallback(() => {
-        if (pathName === "/") {
-            if (clearCollection) clearCollection();
-        }
-    }, [pathName, clearCollection]);
     React.useEffect(() => {
-        clear();
-    }, [clear]);
+        if (collection) window.location.reload();
+    }, [collection]);
     return (
         <>
             <MetaHead />
