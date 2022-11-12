@@ -20,7 +20,7 @@ const HoldersProvider = ({ children }: any) => {
                     wallet: holderId,
                     owned: res.data.data.results.length,
                 };
-                getProfileById(holderId);
+                // getProfileById(holderId);
                 setHolderStats(dataObj);
             })
             .catch((err) => console.error(err));
