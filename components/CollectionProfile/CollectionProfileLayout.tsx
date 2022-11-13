@@ -1,15 +1,18 @@
 import * as React from "react";
 import { collectionContextPartialProps, collectionObject } from "../../@types/collection";
-import { genetateProfileMedias, replaceIPFSToParasCDN } from "../../utils/modules";
+import { genetateProfileMedias, generateCollectionHyperLink, generateProfileHyperLink } from "../../utils/modules";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/collectionInfo.module.css";
 import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
 import { holdersContextPartialProps, profile } from "../../@types/holders";
-import { Avatar, Space } from "antd";
+import { Avatar, Space, Tooltip } from "antd";
 import { Loading } from "../Loading";
 import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import { useRouter } from "next/router";
 import { HoldersContext } from "../../contexts/HoldersContext";
+import Link from "next/link";
 const CollectionProfileLayout = () => {
     const route = useRouter();
     const { collectionId } = route.query;
@@ -95,8 +98,23 @@ const CollectionProfileLayout = () => {
                 </div>
             </div>
             <div className={styles.profile_text_contents}>
-                <h4 className={`${styles.display_title} ${styles.display_text}`}>{collection?.collection}</h4>
-                <h5>Collection by {collection?.creator_id}</h5>
+                <Space size={3}>
+                    <Link href={generateCollectionHyperLink(collection?.collection_id)}>
+                        <h4 className={`${styles.display_title} ${styles.display_text}`}>{collection?.collection}</h4>
+                    </Link>
+                </Space>
+                <Space size={3}>
+                    <h5>Collection by</h5>
+                    <Link href={generateProfileHyperLink(collection?.creator_id)}>
+                        <h5 className={styles.display_text_highlight}>{collection?.creator_id}</h5>
+                    </Link>
+
+                    {collection?.is_creator && (
+                        <Tooltip title="Creator verified">
+                            <FontAwesomeIcon icon={faCircleCheck} color="Dodgerblue" />
+                        </Tooltip>
+                    )}
+                </Space>
                 {/* <p className={`${styles.display_description} ${styles.display_text}`}>{collection?.description}</p> */}
             </div>
             <Stats stats={collection} />

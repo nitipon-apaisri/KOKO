@@ -1,5 +1,5 @@
 import { collectionObject } from "../@types/collection";
-import { parasCDN } from "../constants/baseUrls";
+import { parasCDN, parasCollection, parasMarket } from "../constants/baseUrls";
 
 export const replaceIPFSToParasCDN = (url:string) => {
     if (url !== undefined) {
@@ -42,3 +42,11 @@ export const generateAvatar = (media:string) => {
     };
     return avatar
 } 
+export const generateCollectionHyperLink = (id:string) => {
+    const hyperLink = parasCollection.concat(id)
+    return hyperLink
+}
+export const generateProfileHyperLink = (id:string) => {
+    const hyperLink = parasMarket.concat(id).concat("/creation")
+    return hyperLink
+}

@@ -19,8 +19,11 @@
     max-width: 240px;
     margin: 0 auto;
     width: fit-content;
-    padding: 12px 32px;
+    padding: 12px 0;
     line-height: 1rem;
+}
+.display_text_highlight {
+    font-weight: bolder;
 }
 .display_title {
     overflow: hidden;
@@ -58,6 +61,10 @@
 .table_warpper {
     position: relative;
     min-height: 400px;
+}
+.display_title:hover,
+.display_text_highlight:hover {
+    text-decoration: underline 2px;
 }
 @media only screen and (max-width: 1440px) {
     .container {
