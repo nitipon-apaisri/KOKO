@@ -1,0 +1,21 @@
+.collector_search_input_wrapper {
+    width: 160px;
+    margin: 0 0 0 auto;
+    background-color: #ffffff;
+    border: 0.5px solid #dfdfdf;
+    text-align: left;
+    padding: 4px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition-duration: 300ms;
+}
+.collector_search_input_wrapper:hover {
+    width: 320px;
+}
+.searchIcon {
+    color: #c5c5c5;
+}
+.searchInput {
+    width: 100%;
+}

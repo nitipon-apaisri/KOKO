@@ -7,12 +7,13 @@ import styles from "../../styles/collectionInfo.module.css";
 import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
 import { holdersContextPartialProps, profile } from "../../@types/holders";
-import { Avatar, Space, Tooltip } from "antd";
+import { Avatar, Divider, Empty, Input, Space, Tooltip } from "antd";
 import { Loading } from "../Loading";
 import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import { useRouter } from "next/router";
 import { HoldersContext } from "../../contexts/HoldersContext";
 import Link from "next/link";
+import { CollectorSearchInput } from "../CollectorSearchInput";
 const CollectionProfileLayout = () => {
     const route = useRouter();
     const { collectionId } = route.query;
@@ -20,7 +21,7 @@ const CollectionProfileLayout = () => {
     const [loading, setLoading] = React.useState(true);
     const [width, setWidth] = React.useState(0);
     const { collection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
-    const { holders, profiles, getHolderById } = React.useContext(HoldersContext) as holdersContextPartialProps;
+    const { holders, profiles, isSearch, searchResults, getHolderById } = React.useContext(HoldersContext) as holdersContextPartialProps;
     React.useEffect(() => {
         for (let i = 0; i < collection?.owner_ids.length; i++) {
             if (getHolderById) {
@@ -98,27 +99,45 @@ const CollectionProfileLayout = () => {
                 </div>
             </div>
             <div className={styles.profile_text_contents}>
-                <Space size={3}>
-                    <Link href={generateCollectionHyperLink(collection?.collection_id)}>
-                        <h4 className={`${styles.display_title} ${styles.display_text}`}>{collection?.collection}</h4>
-                    </Link>
-                </Space>
-                <Space size={3}>
-                    <h5>Collection by</h5>
-                    <Link href={generateProfileHyperLink(collection?.creator_id)}>
-                        <h5 className={styles.display_text_highlight}>{collection?.creator_id}</h5>
-                    </Link>
+                <Space direction="vertical" size={2}>
+                    <Space size={3}>
+                        <Link href={generateCollectionHyperLink(collection?.collection_id)}>
+                            <h4 className={`${styles.display_title} ${styles.display_text}`}>{collection?.collection}</h4>
+                        </Link>
+                    </Space>
+                    <Space size={3}>
+                        <h5>Collection by</h5>
+                        <Link href={generateProfileHyperLink(collection?.creator_id)}>
+                            <h5 className={styles.display_text_highlight}>{collection?.creator_id}</h5>
+                        </Link>
 
-                    {collection?.is_creator && (
-                        <Tooltip title="Creator verified">
-                            <FontAwesomeIcon icon={faCircleCheck} color="Dodgerblue" />
-                        </Tooltip>
-                    )}
+                        {collection?.is_creator && (
+                            <Tooltip title="Creator verified">
+                                <FontAwesomeIcon icon={faCircleCheck} color="Dodgerblue" />
+                            </Tooltip>
+                        )}
+                    </Space>
                 </Space>
                 {/* <p className={`${styles.display_description} ${styles.display_text}`}>{collection?.description}</p> */}
             </div>
             <Stats stats={collection} />
-            <div className={styles.table_warpper}>{loading ? <Loading /> : <MainTable data={holders} columns={columns} />}</div>
+            {holders.length !== 0 && (
+                <>
+                    <Divider style={{ margin: "16px 0" }} />
+                    <div className={styles.table_header}>
+                        <h1>Collectors</h1>
+                        <CollectorSearchInput />
+                    </div>
+                    <Divider style={{ margin: "16px 0" }} />
+                </>
+            )}
+            {isSearch && searchResults.length === 0 ? (
+                <>
+                    <Empty />
+                </>
+            ) : (
+                <div className={styles.table_warpper}>{loading ? <Loading /> : <MainTable data={isSearch ? searchResults : holders} columns={columns} />}</div>
+            )}
         </div>
     );
 };

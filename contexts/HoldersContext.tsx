@@ -5,7 +5,9 @@ import { parasApi } from "../api";
 const HoldersContext = React.createContext<holdersContextPartialProps | null>(null);
 const HoldersProvider = ({ children }: any) => {
     const [holders, setHolders] = React.useState<holderStats[]>([]);
+    const [searchResults, setSearchResults] = React.useState<[]>([]);
     const [profiles, setProfiles] = React.useState<profile[]>([]);
+    const [isSearch, setIsSearch] = React.useState<boolean>(false);
     const setHolderStats = (holderObj: holderStats) => {
         setHolders((i: any) => [...i, holderObj]);
     };
@@ -46,7 +48,20 @@ const HoldersProvider = ({ children }: any) => {
     const clearProfiles = () => {
         setProfiles([]);
     };
-    return <HoldersContext.Provider value={{ holders, profiles, clearHolders, clearProfiles, getHolderById }}>{children}</HoldersContext.Provider>;
+    const setSearchHolderResults = (arr: any, input: string) => {
+        if (input.length !== 0 && arr.length !== 0) {
+            setSearchResults(arr);
+            setIsSearch(true);
+        }
+        if (input.length !== 0 && arr.length === 0) {
+            setSearchResults([]);
+        }
+        if (input.length === 0 && arr.length === 0) {
+            setSearchResults([]);
+            setIsSearch(false);
+        }
+    };
+    return <HoldersContext.Provider value={{ holders, profiles, searchResults, isSearch, setSearchHolderResults, clearHolders, clearProfiles, getHolderById }}>{children}</HoldersContext.Provider>;
 };
 
 export { HoldersContext, HoldersProvider };
