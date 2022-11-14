@@ -50,3 +50,7 @@ export const generateProfileHyperLink = (id:string) => {
     const hyperLink = parasMarket.concat(id).concat("/creation")
     return hyperLink
 }
+export const generateExternalLink = (baseUrl:string, link:string) => {
+    const externalLink = baseUrl.concat(link)
+    return externalLink
+}

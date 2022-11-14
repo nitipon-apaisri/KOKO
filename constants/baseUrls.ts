@@ -1,3 +1,5 @@
 export const parasCDN = "https://paras-cdn.imgix.net/"
 export const parasCollection =  "https://paras.id/collection/"
 export const parasMarket =  "https://paras.id/"
+export const twitter = "https://twitter.com/"
+export const discord = "https://discord.gg/"

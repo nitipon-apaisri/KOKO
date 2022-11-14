@@ -1,0 +1,12 @@
+.external_links_wrapper {
+    margin-top: 16px;
+}
+.icon {
+    transition-duration: 150ms;
+}
+.discord_icon:hover {
+    color: #6671f6;
+}
+.collection_link:hover {
+    color: #f5a525;
+}

@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { HoldersContext } from "../../contexts/HoldersContext";
 import Link from "next/link";
 import { CollectorSearchInput } from "../CollectorSearchInput";
+import { ExternalLinks } from "../ExternalLinks";
 const CollectionProfileLayout = () => {
     const route = useRouter();
     const { collectionId } = route.query;
@@ -117,6 +118,7 @@ const CollectionProfileLayout = () => {
                             </Tooltip>
                         )}
                     </Space>
+                    <ExternalLinks />
                 </Space>
                 {/* <p className={`${styles.display_description} ${styles.display_text}`}>{collection?.description}</p> */}
             </div>
