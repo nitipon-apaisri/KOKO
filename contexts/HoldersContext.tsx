@@ -23,7 +23,6 @@ const HoldersProvider = ({ children }: any) => {
                     owned: res.data.data.results.length,
                 };
 
-                // getProfileById(holderId);
                 setHolderStats(dataObj);
             })
             .catch((err) => console.error(err));
@@ -61,7 +60,11 @@ const HoldersProvider = ({ children }: any) => {
             setIsSearch(false);
         }
     };
-    return <HoldersContext.Provider value={{ holders, profiles, searchResults, isSearch, setSearchHolderResults, clearHolders, clearProfiles, getHolderById }}>{children}</HoldersContext.Provider>;
+    return (
+        <HoldersContext.Provider value={{ holders, profiles, searchResults, isSearch, setSearchHolderResults, clearHolders, clearProfiles, getHolderById, getProfileById }}>
+            {children}
+        </HoldersContext.Provider>
+    );
 };
 
 export { HoldersContext, HoldersProvider };

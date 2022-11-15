@@ -1,8 +1,8 @@
 import * as React from "react";
 import { collectionContextPartialProps, collectionObject } from "../../@types/collection";
-import { genetateProfileMedias, generateCollectionHyperLink, generateProfileHyperLink } from "../../utils/modules";
+import { genetateProfileMedias, generateCollectionHyperLink, generateProfileHyperLink, replaceIPFSToParasCDN } from "../../utils/modules";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faUser } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/collectionInfo.module.css";
 import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
@@ -22,12 +22,25 @@ const CollectionProfileLayout = () => {
     const [loading, setLoading] = React.useState(true);
     const [width, setWidth] = React.useState(0);
     const { collection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
-    const { holders, profiles, isSearch, searchResults, getHolderById } = React.useContext(HoldersContext) as holdersContextPartialProps;
+    const { holders, profiles, isSearch, searchResults, getHolderById, getProfileById } = React.useContext(HoldersContext) as holdersContextPartialProps;
+    const fetchProfile = React.useCallback(
+        (id: string) => {
+            if (getProfileById) getProfileById(id);
+        },
+        [getProfileById]
+    );
+    const fetchHolder = React.useCallback(
+        (id: string) => {
+            if (getHolderById) getHolderById(id, collection_id);
+        },
+        [getHolderById, collection_id]
+    );
     React.useEffect(() => {
         for (let i = 0; i < collection?.owner_ids.length; i++) {
-            if (getHolderById) {
-                getHolderById(collection?.owner_ids[i], collection_id);
-            }
+            setTimeout(() => {
+                fetchHolder(collection?.owner_ids[i]);
+                fetchProfile(collection?.owner_ids[i]);
+            }, 1000);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -39,12 +52,12 @@ const CollectionProfileLayout = () => {
             if (holders.length === collection?.owner_ids.length) setLoading(false);
         }
     }, [holders, collection]);
-    const updateWindowSize = () => {
-        setWidth(window.innerWidth);
-    };
     React.useEffect(() => {
         window.addEventListener("resize", updateWindowSize);
     }, []);
+    const updateWindowSize = () => {
+        setWidth(window.innerWidth);
+    };
     const columns = [
         {
             title: "Wallet",
@@ -62,19 +75,17 @@ const CollectionProfileLayout = () => {
                 showTitle: false,
             },
             width: "80%",
-            // render: (v: string) => {
-            //     // const index = profiles?.findIndex((i: profile) => i.accountId === v);
-            //     return (
-            //         <>
-            //             {index !== -1 && (
-            //                 <Space>
-            //                     {/* <Avatar src={`${replaceIPFSToParasCDN(profiles[index].imgUrl)}`} /> */}
-            //                     <span>{v}</span>
-            //                 </Space>
-            //             )}
-            //         </>
-            //     );
-            // },
+            render: (v: string) => {
+                const index = profiles?.findIndex((i: profile) => i.accountId === v);
+                return (
+                    <>
+                        <Space>
+                            {index !== -1 ? <Avatar src={`${replaceIPFSToParasCDN(profiles[index].imgUrl)}`} /> : <Avatar icon={<FontAwesomeIcon icon={faUser} />} />}
+                            <span>{v}</span>
+                        </Space>
+                    </>
+                );
+            },
         },
         {
             title: "Owned",
