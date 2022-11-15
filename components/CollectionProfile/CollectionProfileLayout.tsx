@@ -7,7 +7,7 @@ import styles from "../../styles/collectionInfo.module.css";
 import { Stats } from "../Stats";
 import { MainTable } from "../MainTable";
 import { holdersContextPartialProps, profile } from "../../@types/holders";
-import { Avatar, Divider, Empty, Input, Space, Tooltip } from "antd";
+import { Avatar, Divider, Empty, Space, Tooltip } from "antd";
 import { Loading } from "../Loading";
 import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import { useRouter } from "next/router";
@@ -20,7 +20,6 @@ const CollectionProfileLayout = () => {
     const { collectionId } = route.query;
     const collection_id: string = collectionId as string;
     const [loading, setLoading] = React.useState(true);
-    const [width, setWidth] = React.useState(0);
     const { collection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const { holders, profiles, isSearch, searchResults, getHolderById, getProfileById } = React.useContext(HoldersContext) as holdersContextPartialProps;
     const fetchProfile = React.useCallback(
@@ -46,18 +45,12 @@ const CollectionProfileLayout = () => {
     }, []);
     React.useEffect(() => {
         if (collection?.owner_ids.length > 10) {
-            if (holders.length >= 10) setLoading(false);
+            if (holders.length >= collection?.owner_ids.length / 2) setLoading(false);
         }
         if (collection?.owner_ids.length <= 10) {
             if (holders.length === collection?.owner_ids.length) setLoading(false);
         }
     }, [holders, collection]);
-    React.useEffect(() => {
-        window.addEventListener("resize", updateWindowSize);
-    }, []);
-    const updateWindowSize = () => {
-        setWidth(window.innerWidth);
-    };
     const columns = [
         {
             title: "Wallet",
@@ -91,7 +84,7 @@ const CollectionProfileLayout = () => {
             title: "Owned",
             dataIndex: "owned",
             align: "right",
-            width: width <= 960 ? "20%" : "10%",
+            width: "10%",
             sorter: (a: any, b: any) => {
                 if (a.owned < b.owned) {
                     return -1;

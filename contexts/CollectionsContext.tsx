@@ -38,7 +38,7 @@ const CollecitonProvider = ({ children }: any) => {
             setCollectionSearch([]);
             setSuggestionNotFound(false);
             parasApi
-                .get(`collections?collection_search=${input}`)
+                .get(`collections?__limit=5&collection_search=${input}`)
                 .then((res) => {
                     if (res.data.data.results.length === 0) {
                         setSuggestionNotFound(true);

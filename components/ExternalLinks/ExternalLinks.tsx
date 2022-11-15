@@ -1,4 +1,4 @@
-import { Space } from "antd";
+import { Divider, Space } from "antd";
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareArrowUpRight, faLink } from "@fortawesome/free-solid-svg-icons";
