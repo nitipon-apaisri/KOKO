@@ -19,17 +19,17 @@ const ExternalLinks = () => {
                     <FontAwesomeIcon icon={faSquareArrowUpRight} size="xl" className={`${styles.icon} ${styles.collection_link}`} />
                 </Link>
                 {collection?.socialMedia.twitter !== "" && (
-                    <Link href={generateExternalLink(twitter, collection?.socialMedia.twitter)}>
+                    <Link href={generateExternalLink(twitter, collection?.socialMedia.twitter)} className={styles.link}>
                         <FontAwesomeIcon icon={faTwitter} size="xl" className={`${styles.icon}`} />
                     </Link>
                 )}
                 {collection?.socialMedia.discord !== "" && (
-                    <Link href={generateExternalLink(discord, collection?.socialMedia.discord)}>
+                    <Link href={generateExternalLink(discord, collection?.socialMedia.discord)} className={styles.link}>
                         <FontAwesomeIcon icon={faDiscord} size="xl" className={`${styles.icon} ${styles.discord_icon}`} />
                     </Link>
                 )}
                 {collection?.socialMedia.website !== "" && (
-                    <Link href={collection?.socialMedia.website}>
+                    <Link href={collection?.socialMedia.website} className={styles.link}>
                         <FontAwesomeIcon icon={faLink} size="xl" className={styles.icon} />
                     </Link>
                 )}
