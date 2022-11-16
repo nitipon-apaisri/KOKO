@@ -39,13 +39,13 @@ const CollectionProfileLayout = () => {
             setTimeout(() => {
                 fetchHolder(collection?.owner_ids[i]);
                 fetchProfile(collection?.owner_ids[i]);
-            }, 1000);
+            }, i * 500);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     React.useEffect(() => {
         if (collection?.owner_ids.length > 10) {
-            if (holders.length >= collection?.owner_ids.length / 2) setLoading(false);
+            if (holders.length >= 10) setLoading(false);
         }
         if (collection?.owner_ids.length <= 10) {
             if (holders.length === collection?.owner_ids.length) setLoading(false);

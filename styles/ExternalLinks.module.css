@@ -1,6 +1,9 @@
 .external_links_wrapper {
     margin-top: 16px;
 }
+.link {
+    color: #262626;
+}
 .icon {
     transition-duration: 150ms;
 }

@@ -15,7 +15,7 @@ const ExternalLinks = () => {
     return (
         <div className={styles.external_links_wrapper}>
             <Space size={16}>
-                <Link href={generateCollectionHyperLink(collection?.collection_id)}>
+                <Link href={generateCollectionHyperLink(collection?.collection_id)} className={styles.link}>
                     <FontAwesomeIcon icon={faSquareArrowUpRight} size="xl" className={`${styles.icon} ${styles.collection_link}`} />
                 </Link>
                 {collection?.socialMedia.twitter !== "" && (
