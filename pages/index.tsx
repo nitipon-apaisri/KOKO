@@ -12,10 +12,12 @@ const { Title } = Typography;
 const App = () => {
     const router = useRouter();
     const pathName = router.pathname;
-    const { collection, activeSuggestions, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
-    const fetchCollection = (collectionId: string) => {
+    const { collection, activeSuggestions, onSearchACollection, clearCollection, hideActiveSuggestions } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
+    const fetchCollection = (key: string) => {
+        if (hideActiveSuggestions) hideActiveSuggestions();
+        if (clearCollection) clearCollection();
         setTimeout(() => {
-            router.push(`collection/${collectionId}`);
+            router.push(`search/${key}`);
         }, 200);
     };
     React.useEffect(() => {

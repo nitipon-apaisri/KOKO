@@ -1,18 +1,22 @@
 import * as React from "react";
 import { collectionObject, collectionContextPartialProps, onSearchCollectionsObject } from "../@types/collection";
 import { parasApi } from "../api";
+import { generateCollectionObject } from "../utils/modules";
 
 const CollecitonsContext = React.createContext<collectionContextPartialProps | null>(null);
 const CollecitonProvider = ({ children }: any) => {
     const [collection, setCollection] = React.useState<collectionObject>();
-    const [collections, setCollections] = React.useState<{}[]>([]);
-    const [collectionsSearch, setCollectionSearch] = React.useState<{}[]>([]);
+    const [collections, setCollections] = React.useState<collectionObject[]>([]);
+    const [collectionsSearch, setCollectionSearch] = React.useState<collectionObject[]>([]);
     const [notFound, setNotFound] = React.useState<boolean>(false);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [activeSuggestions, setActiveSuggestions] = React.useState<boolean>(false);
     const [suggestionNotFound, setSuggestionNotFound] = React.useState<boolean>(false);
     const setOnSearchCollection = (data: onSearchCollectionsObject) => {
         setCollectionSearch((i: any) => [...i, data]);
+    };
+    const setOnSearchCollectionsEnchance = (data: onSearchCollectionsObject) => {
+        setCollections((i: any) => [...i, data]);
     };
     const getCollection = async (collectionId: string) => {
         parasApi
@@ -43,17 +47,9 @@ const CollecitonProvider = ({ children }: any) => {
                     if (res.data.data.results.length === 0) {
                         setSuggestionNotFound(true);
                     } else {
+                        setSuggestionNotFound(false);
                         res.data.data.results.forEach((i: any) => {
-                            const dataObj = {
-                                _id: i._id,
-                                media: i.media,
-                                collection: i.collection,
-                                creator_id: i.creator_id,
-                                is_creator: i.is_creator,
-                                collection_id: i.collection_id,
-                            };
-                            setSuggestionNotFound(false);
-                            setOnSearchCollection(dataObj);
+                            setOnSearchCollection(generateCollectionObject(i));
                         });
                     }
                 })
@@ -65,6 +61,17 @@ const CollecitonProvider = ({ children }: any) => {
             setSuggestionNotFound(false);
         }
     };
+    const searchCollections = (key: string) => {
+        setCollections([]);
+        parasApi
+            .get(`collections?__limit=5&collection_search=${key}`)
+            .then((res) => {
+                res.data.data.results.forEach((i: any) => {
+                    setOnSearchCollectionsEnchance(generateCollectionObject(i));
+                });
+            })
+            .catch((err) => console.error(err));
+    };
     const clearCollection = () => {
         setCollection(undefined);
     };
@@ -73,7 +80,20 @@ const CollecitonProvider = ({ children }: any) => {
     };
     return (
         <CollecitonsContext.Provider
-            value={{ collection, collections, collectionsSearch, notFound, loading, activeSuggestions, suggestionNotFound, hideActiveSuggestions, clearCollection, getCollection, onSearchACollection }}
+            value={{
+                collection,
+                collections,
+                collectionsSearch,
+                notFound,
+                loading,
+                activeSuggestions,
+                suggestionNotFound,
+                hideActiveSuggestions,
+                clearCollection,
+                getCollection,
+                onSearchACollection,
+                searchCollections,
+            }}
         >
             {children}
         </CollecitonsContext.Provider>

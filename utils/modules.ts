@@ -33,6 +33,7 @@ export const genetateProfileMedias = ({cover, media}:{cover:string, media:string
     };
     return profileMedias
 } 
+
 export const generateAvatar = (media:string) => {
     const avatar = {
         pfp: {
@@ -41,16 +42,32 @@ export const generateAvatar = (media:string) => {
         },
     };
     return avatar
-} 
+}
+
 export const generateCollectionHyperLink = (id:string) => {
     const hyperLink = parasCollection.concat(id)
     return hyperLink
 }
+
 export const generateProfileHyperLink = (id:string) => {
     const hyperLink = parasMarket.concat(id).concat("/creation")
     return hyperLink
 }
+
 export const generateExternalLink = (baseUrl:string, link:string) => {
     const externalLink = baseUrl.concat(link)
     return externalLink
+}
+
+export const generateCollectionObject = (value: any) => {
+    const collectionObj = {
+        _id: value._id,
+        media: value.media,
+        cover: value.cover,
+        collection: value.collection,
+        creator_id: value.creator_id,
+        is_creator: value.is_creator,
+        collection_id: value.collection_id,
+    };
+    return collectionObj
 }

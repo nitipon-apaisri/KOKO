@@ -1,15 +1,16 @@
 export type collectionContextPartialProps = {
-    collection: any;
-    notFound: boolean;
-    loading: boolean;
+    collection: any
+    notFound: boolean
+    loading: boolean
     activeSuggestions: boolean
     suggestionNotFound: boolean
     collections: {}[]
     collectionsSearch: {}[]
     clearCollection?: () => void 
     hideActiveSuggestions?: () => void
-    getCollection?: (collectionId: string) => void;
+    getCollection?: (collectionId: string) => void
     onSearchACollection?: (input: string) => void
+    searchCollections?: (key: string) => void
 }
 export interface collectionObject {
     _id: string;
@@ -32,6 +33,7 @@ export interface collectionObject {
 export interface onSearchCollectionsObject {
     _id: string
     media: string
+    cover: string
     collection: string
     creator_id: string
     is_creator: boolean
