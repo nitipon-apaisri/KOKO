@@ -6,16 +6,22 @@ import styles from "../../styles/SearchInput.module.css";
 import { collectionContextPartialProps, search } from "../../@types/collection";
 import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import { useRouter } from "next/router";
-const SearchInput = ({ pathName }: { pathName: string }) => {
+const SearchInput = () => {
     const router = useRouter();
+    const pathName = router.pathname;
     const { onSearchACollection, clearCollection, hideActiveSuggestions } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const [timer, setTimer] = React.useState<any>(null);
+    const generateRoute = (collectionId: string) => {
+        if (pathName === "/") return `search/${collectionId}`;
+        if (pathName.includes("collection") === true) return `../search/${collectionId}`;
+        if (pathName.includes("search") === true) return `${collectionId}`;
+    };
     const fetchCollection = (key: string) => {
         if (hideActiveSuggestions) hideActiveSuggestions();
         if (clearCollection) clearCollection();
         setTimeout(() => {
-            router.push(pathName !== "/" ? `${key}` : `search/${key}`);
-        }, 200);
+            router.push(`${generateRoute(key as string)}`);
+        }, 250);
     };
     const searchCollection = (input: string, type: string) => {
         if (input.length === 0) {

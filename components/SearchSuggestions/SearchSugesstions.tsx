@@ -14,7 +14,13 @@ const SearchSuggestions = () => {
     const { collectionsSearch, suggestionNotFound, activeSuggestions, hideActiveSuggestions } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const route = useRouter();
     const pathName = route.pathname;
+    const generateRoute = (collectionId: string) => {
+        if (pathName === "/") return `collection/${collectionId}`;
+        if (pathName !== "/" && pathName.includes("search") === false) return `${collectionId}`;
+        if (pathName.includes("search") === true) return `../collection/${collectionId}`;
+    };
     const reload = () => {
+        if (hideActiveSuggestions) hideActiveSuggestions();
         setTimeout(() => {
             window.location.reload();
         }, 150);
@@ -34,7 +40,7 @@ const SearchSuggestions = () => {
                         ?.sort((a: any, b: any) => (a.is_creator < b.is_creator ? -1 : 1))
                         .filter((v: any, i: any, a: any) => a.findIndex((v2: any) => v2._id === v._id) === i)
                         .map((r: any, i) => (
-                            <Link href={pathName !== "/" ? `${r.collection_id}` : `collection/${r.collection_id}`} key={r._id} onClick={() => reload()}>
+                            <Link href={`${generateRoute(r.collection_id as string)}`} key={r._id} onClick={() => reload()}>
                                 <div className={`${styles.suggestion_item} ${styles.item_bt_border}`} id="suggestion_item">
                                     <Space>
                                         <Avatar src={`${concatMediaWithParasCDN(r.media)}`} style={{ border: "1px solid #dfdfdf" }} />

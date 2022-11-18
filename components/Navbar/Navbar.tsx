@@ -10,13 +10,7 @@ import Link from "next/link";
 const Navbar = () => {
     const router = useRouter();
     const pathName = router.pathname;
-    const { activeSuggestions, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
-    const fetchCollection = (collectionId: string) => {
-        router.push(`${collectionId}`);
-        setTimeout(() => {
-            window.location.reload();
-        }, 200);
-    };
+    const { activeSuggestions } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     return (
         <nav className={pathName === "/" ? `${styles.menu} ${styles.menu_home}` : styles.menu}>
             <Link href={`/`}>
@@ -26,7 +20,7 @@ const Navbar = () => {
             <div className={styles.search_input}>
                 {pathName !== "/" && (
                     <>
-                        <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
+                        <SearchInput />
                         {activeSuggestions && pathName !== "/" && <SearchSuggestions />}
                     </>
                 )}
