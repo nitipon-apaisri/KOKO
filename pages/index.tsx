@@ -12,14 +12,7 @@ const { Title } = Typography;
 const App = () => {
     const router = useRouter();
     const pathName = router.pathname;
-    const { collection, activeSuggestions, onSearchACollection, clearCollection, hideActiveSuggestions } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
-    const fetchCollection = (key: string) => {
-        if (hideActiveSuggestions) hideActiveSuggestions();
-        if (clearCollection) clearCollection();
-        setTimeout(() => {
-            router.push(`search/${key}`);
-        }, 200);
-    };
+    const { collection, activeSuggestions } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     React.useEffect(() => {
         if (collection) window.location.reload();
     }, [collection]);
@@ -28,7 +21,7 @@ const App = () => {
             <MetaHead />
             <div className={`${styles.container}`}>
                 <Title>Explore a collection</Title>
-                <SearchInput search={fetchCollection} onSearch={onSearchACollection} pathName={pathName} />
+                <SearchInput pathName={pathName} />
                 {activeSuggestions && <SearchSuggestions />}
             </div>
         </>
