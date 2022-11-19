@@ -11,17 +11,15 @@ const Collection = () => {
     const router = useRouter();
     const { collection, notFound, loading, getCollection, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const { collectionId } = router.query;
-
     React.useEffect(() => {
         if (collection?.collection_id !== collectionId) {
             if (getCollection) getCollection(collectionId as string);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [collection, collectionId]);
     React.useEffect(() => {
-        if (onSearchACollection) onSearchACollection("");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     return (
         <>
             <MetaHead title={collection ? `Lookup | ${collection?.collection}` : "Collection not found"} description={collection ? collection?.description : "Collection not found"} />
