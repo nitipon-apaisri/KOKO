@@ -4,6 +4,7 @@ import { CollecitonsContext } from "../../contexts/CollectionsContext";
 import { collectionContextPartialProps } from "../../@types/collection";
 import { Space } from "antd";
 import { CollectionGroup } from "../../components/CollectionGroup";
+import MetaHead from "../../components/MetaHead";
 
 const SearchSuggestionsPage = () => {
     const { searchCollections } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
@@ -15,6 +16,7 @@ const SearchSuggestionsPage = () => {
     }, [key]);
     return (
         <Space>
+            <MetaHead title={`Search by ${key} `} description={`Search by ${key} `} />
             <CollectionGroup />
         </Space>
     );
