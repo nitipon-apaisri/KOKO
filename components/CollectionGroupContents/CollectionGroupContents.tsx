@@ -23,20 +23,23 @@ const CollectionGroupContents = () => {
                 if (collections.length !== 0)
                     return (
                         <Row gutter={[24, 24]}>
-                            {collections.map((i: any) => (
-                                <Col span={6} key={i._id}>
-                                    <Link href={`../collection/${i.collection_id}`} onClick={() => reload()}>
-                                        <div className={styles.card}>
-                                            <div className={styles.pfp_cover}>
-                                                <div style={generateAvatar(i.media).pfp} className={styles.pfp}></div>
+                            {collections
+                                .sort((a: any, b: any) => (a.collection < b.collection ? -1 : 1))
+                                .filter((v: any, i: any, a: any) => a.findIndex((v2: any) => v2._id === v._id) === i)
+                                .map((i: any) => (
+                                    <Col span={6} key={i._id}>
+                                        <Link href={`../collection/${i.collection_id}`} onClick={() => reload()}>
+                                            <div className={styles.card}>
+                                                <div className={styles.pfp_cover}>
+                                                    <div style={generateAvatar(i.media).pfp} className={styles.pfp}></div>
+                                                </div>
+                                                <div className={styles.collection_name}>
+                                                    <h5 style={{ marginBottom: 0 }}>{i.collection}</h5>
+                                                </div>
                                             </div>
-                                            <div className={styles.collection_name}>
-                                                <h5 style={{ marginBottom: 0 }}>{i.collection}</h5>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </Col>
-                            ))}
+                                        </Link>
+                                    </Col>
+                                ))}
                         </Row>
                     );
             })()}
