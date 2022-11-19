@@ -23,6 +23,9 @@
 }
 .display_text_highlight {
     font-weight: bolder;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 160px;
 }
 .display_title {
     overflow: hidden;
