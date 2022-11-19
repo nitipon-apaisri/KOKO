@@ -35,20 +35,26 @@ const CollectionProfileLayout = () => {
         [getHolderById, collection_id]
     );
     React.useEffect(() => {
-        for (let i = 0; i < collection?.owner_ids.length; i++) {
-            setTimeout(() => {
-                fetchHolder(collection?.owner_ids[i]);
-                fetchProfile(collection?.owner_ids[i]);
-            }, i * 500);
+        if (collection?.owner_ids !== undefined) {
+            for (let i = 0; i < collection?.owner_ids.length; i++) {
+                setTimeout(() => {
+                    fetchHolder(collection?.owner_ids[i]);
+                    fetchProfile(collection?.owner_ids[i]);
+                }, i * 500);
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     React.useEffect(() => {
-        if (collection?.owner_ids.length > 10) {
-            if (holders.length >= 10) setLoading(false);
-        }
-        if (collection?.owner_ids.length <= 10) {
-            if (holders.length === collection?.owner_ids.length) setLoading(false);
+        if (collection?.owner_ids !== undefined) {
+            if (collection?.owner_ids.length > 10) {
+                if (holders.length >= 10) setLoading(false);
+            }
+            if (collection?.owner_ids.length <= 10) {
+                if (holders.length === collection?.owner_ids.length) setLoading(false);
+            }
+        } else {
+            setLoading(false);
         }
     }, [holders, collection]);
     const columns = [

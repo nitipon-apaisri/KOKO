@@ -1,7 +1,9 @@
 export type collectionContextPartialProps = {
     collection: any
     notFound: boolean
+    collectionGroupNotFound: boolean
     loading: boolean
+    collectionGroupLoading: boolean
     activeSuggestions: boolean
     suggestionNotFound: boolean
     collections: {}[]

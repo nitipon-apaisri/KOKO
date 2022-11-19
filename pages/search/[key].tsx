@@ -9,7 +9,6 @@ const SearchSuggestionsPage = () => {
     const { searchCollections } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const router = useRouter();
     const { key } = router.query;
-
     React.useEffect(() => {
         if (searchCollections) searchCollections(key as string);
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -11,13 +11,13 @@ const Collection = () => {
     const router = useRouter();
     const { collection, notFound, loading, getCollection, onSearchACollection } = React.useContext(CollecitonsContext) as collectionContextPartialProps;
     const { collectionId } = router.query;
-    const collection_id: string = collectionId as string;
 
     React.useEffect(() => {
         if (collection?.collection_id !== collectionId) {
-            if (getCollection) getCollection(collection_id);
+            if (getCollection) getCollection(collectionId as string);
         }
-    }, [collection, getCollection, collection_id, collectionId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [collection, collectionId]);
     React.useEffect(() => {
         if (onSearchACollection) onSearchACollection("");
         // eslint-disable-next-line react-hooks/exhaustive-deps

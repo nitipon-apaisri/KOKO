@@ -9,7 +9,9 @@ const CollecitonProvider = ({ children }: any) => {
     const [collections, setCollections] = React.useState<collectionObject[]>([]);
     const [collectionsSearch, setCollectionSearch] = React.useState<collectionObject[]>([]);
     const [notFound, setNotFound] = React.useState<boolean>(false);
+    const [collectionGroupNotFound, setCollectionGroupNotFound] = React.useState<boolean>(true);
     const [loading, setLoading] = React.useState<boolean>(true);
+    const [collectionGroupLoading, setCollectionGroupLoading] = React.useState<boolean>(true);
     const [activeSuggestions, setActiveSuggestions] = React.useState<boolean>(false);
     const [suggestionNotFound, setSuggestionNotFound] = React.useState<boolean>(false);
     const setOnSearchCollection = (data: onSearchCollectionsObject) => {
@@ -50,6 +52,9 @@ const CollecitonProvider = ({ children }: any) => {
                         setSuggestionNotFound(false);
                         res.data.data.results.forEach((i: any) => {
                             setOnSearchCollection(generateCollectionObject(i));
+                            setTimeout(() => {
+                                setCollectionGroupLoading(false);
+                            }, 50);
                         });
                     }
                 })
@@ -61,14 +66,27 @@ const CollecitonProvider = ({ children }: any) => {
             setSuggestionNotFound(false);
         }
     };
-    const searchCollections = (key: string) => {
+    const searchCollections = async (key: string) => {
         setCollections([]);
-        parasApi
-            .get(`collections?__limit=5&collection_search=${key}`)
+        setCollectionGroupLoading(true);
+        setCollectionGroupNotFound(false);
+        await parasApi
+            .get(`collections?__limit=8&collection_search=${key}`)
             .then((res) => {
-                res.data.data.results.forEach((i: any) => {
-                    setOnSearchCollectionsEnchance(generateCollectionObject(i));
-                });
+                if (res.data.data.results.length > 0) {
+                    setCollectionGroupNotFound(false);
+                    res.data.data.results.forEach((i: any) => {
+                        setOnSearchCollectionsEnchance(generateCollectionObject(i));
+                    });
+                    setTimeout(() => {
+                        setCollectionGroupLoading(false);
+                    }, 50);
+                }
+                if (res.data.data.results.length === 0) {
+                    setTimeout(() => {
+                        setCollectionGroupLoading(false);
+                    }, 50);
+                }
             })
             .catch((err) => console.error(err));
     };
@@ -85,7 +103,9 @@ const CollecitonProvider = ({ children }: any) => {
                 collections,
                 collectionsSearch,
                 notFound,
+                collectionGroupNotFound,
                 loading,
+                collectionGroupLoading,
                 activeSuggestions,
                 suggestionNotFound,
                 hideActiveSuggestions,

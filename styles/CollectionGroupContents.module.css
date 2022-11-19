@@ -1,0 +1,40 @@
+.contents {
+    position: relative;
+}
+.card {
+    padding: 24px;
+    border-radius: 16px;
+    border: 0.5px solid #dfdfdf;
+    transition-duration: 300ms;
+}
+.card:hover {
+    border: 0.5px solid transparent;
+    box-shadow: 0px 18px 31px rgba(0, 0, 0, 0.06);
+}
+.pfp_cover {
+    overflow: hidden;
+    border-radius: 16px;
+}
+.pfp {
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition-duration: 300ms;
+}
+.pfp:hover {
+    transition: all 0.5;
+    transform: scale(1.2);
+}
+.collection_name {
+    margin-top: 16px;
+    border-radius: 12px;
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 16px;
+}
+.collection_name h5 {
+    font-weight: 600;
+    letter-spacing: 0.015rem;
+}
